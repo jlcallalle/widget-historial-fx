@@ -1,29 +1,118 @@
-# README #
+# Widget Name
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Table of Contents
 
-### What is this repository for? ###
++ [About](#about)
++ [Getting Started](#getting_started)
++ [Usage](#usage)
++ [Add Ons](#add_ons)
++ [Contributing](#contributing)
++ [Licence](#license)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## About <a name="about"></a>
 
-### How do I get set up? ###
+Description of the widget and functionalities
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+| Functionality   | Description       |
+|:----------------|:------------------|
+| Functionality A | short description |
+| Functionality B | short description |
+| Functionality C | short description |
 
-### Contribution guidelines ###
+## Getting Started
 
-* Writing tests
-* Code review
-* Other guidelines
+These instructions will get you a copy of the template Widget up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on Modyo.
 
-### Who do I talk to? ###
+### Development Setup
 
-* Repo owner or admin
-* Other community or team contact
+This project requires NodeJS (version LTS or later), NPM and YARN.
+[Node](http://nodejs.org/), [NPM](https://npmjs.org/) and [YARN](https://yarnpkg.com/) are really easy to install. To make sure you have them available on your machine, try running the following command.
+
+```sh
+node -v
+npm -v
+yarn -v
+```
+
+Also you will need the [Modyo CLI](https://docs.modyo.com/platform/channels/widgets.html#modyo-cli) tool installed globally on your local machine.
+
+```sh
+npm i -g @modyo/cli #via npm
+yarn global add @modyo/cli #via yarn
+```
+
+### Installing
+
+**BEFORE YOU INSTALL:** please read the **Development Setup** above.
+
+To install a copy of this Widget on your local machine:
+
+```sh
+modyo-cli get modyo-widgets-template-vue [DIRECTORY]
+```
+
+This command will clone the template Widget and install it's dependencies.
+
+## Usage
+
+### Serving the Widget
+
+```sh
+yarn serve
+```
+
+### Running the tests and linters
+
+```sh
+yarn test:unit
+yarn lint
+yarn lint:styles
+```
+
+### Get a I18N report to check for missing translations or status
+
+```sh
+yarn i18n:report
+```
+
+### To create a production build
+
+```sh
+yarn build
+```
+
+This task will create a distribution version of the Widget inside your local `dist/` folder
+
+### Serving a production version
+
+```sh
+yarn serve --mode=production
+```
+
+## Features
+
+### Bootstrap
+
+### Fontawesome
+
+### VeeValidate
+
+### Vue I18n
+
+### LiquidJS
+
+### Vue Axe
+
+### ESLint
+
+### Stylelint
+
+### PurgeCSS
+
+## Contributing
+
+Please make sure to read the [Contributing Guide](/.github/CONTRIBUTING.md) before making a pull request.
+
+## License
+
+SEE LICENSE IN [LICENSE.md](/LICENSE.md)
