@@ -2,4 +2,101 @@
 @import "~bootstrap";
 @import "./theme";
 
+/* Title Modyo Cli*/
+.title-widget {
+    margin: 0 auto;
+    @include media-breakpoint-up(sm) { 
+        max-width: 540px;
+    }
+    @include media-breakpoint-up(md) { 
+        max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) { 
+        max-width: 960px;
+    }
+    @include media-breakpoint-up(xl) { 
+        max-width: 1140px;
+    }
+}
+
+
 /* Vista Historial */
+
+.widget-widget-historial-fx {
+    .container-widget {
+      margin-top: 10px;
+    }
+}
+  
+.box-consultar {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 28px 20px 25px 20px;
+    width: 100%;
+    label {
+      font-family: 'Montserrat';
+      font-size: 14px;
+      line-height: 15px;
+      color: #424242;
+    }
+  }
+  
+  .box-consulta-descarga {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+  }
+  .icon-descarga {
+    position: relative;
+    top: -6px;
+  }
+  .btn-columna {
+    display: flex;
+    align-items: center;
+    
+    span {
+      font-size: 15px;
+      line-height: 20px;
+      margin-left: 12px;
+    }
+  }
+  
+  .box-filtrado {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 28px 20px 28px 20px;
+    width: 100%;
+  }
+  
+  .btn-pill {
+    display: flex;
+    color:#424242;
+    background: #F5F5F5;
+    border-radius: 8px;
+    padding: 10px 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 17px;
+    .close {
+      position: absolute;
+      top: 2px;
+      right: 9px; 
+    }
+  }
+  
+  .box-consultar, .box-filtrado {
+    .form-row {
+      .form-group {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  .box-filtrado {
+    justify-content: space-between;
+  }
+
+
+
