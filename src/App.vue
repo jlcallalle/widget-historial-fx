@@ -100,7 +100,7 @@
         <div class="row mt-4">
           <div class="box-filtrado">
             <div class="form-row">
-              <div class="form-group col-md-2">
+              <div class="row-pills">
                 <div class="btn btn-pill">
                   Producto
                   <button
@@ -110,8 +110,6 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-              </div>
-              <div class="form-group col-md-2">
                 <div class="btn btn-pill">
                   Cliente
                   <button
@@ -121,8 +119,6 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-              </div>
-              <div class="form-group col-md-2">
                 <div class="btn btn-pill">
                   Operador
                   <button
@@ -132,8 +128,6 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-              </div>
-              <div class="form-group col-md-2">
                 <div class="btn btn-pill">
                   #Ref/Folio
                   <button
@@ -144,8 +138,7 @@
                   </button>
                 </div>
               </div>
-
-              <div class="form-group col-md-3">
+              <div class="row-col">
                 <button
                   type="submit"
                   class="btn btn-primary btn-columna">
@@ -163,6 +156,92 @@
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="box-table-result">
+            <div class="table-historial table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-color">
+                  <tr>
+                    <th>Producto</th>
+                    <th>Operador</th>
+                    <th>Fecha de concertación</th>
+                    <th># Rel/Folio</th>
+                    <th>Monto operado</th>
+                    <th>Tipo de cambio acordado</th>
+                    <th>Fecha de liquidación</th>
+                    <th>Divisa Origen</th>
+                    <th>Confirmación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Fx Spot</td>
+                    <td>Invex Bravo</td>
+                    <td>01/06/2022</td>
+                    <td>113456032</td>
+                    <td>100,00.00</td>
+                    <td>150,00.00</td>
+                    <td>01/06/2021</td>
+                    <td>USD</td>
+                    <td><input type="checkbox"></td>
+                  </tr>
+                  <tr>
+                    <td>Fx Forward</td>
+                    <td>Invex Garcia</td>
+                    <td>01/06/2022</td>
+                    <td>113456032</td>
+                    <td>120,00.00</td>
+                    <td>170,00.00</td>
+                    <td>01/06/2022</td>
+                    <td>USD</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-resultado justify-content-center">
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="#"
+                    aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="#">1</a>
+                </li>
+                <li class="page-item active">
+                  <a
+                    class="page-link"
+                    href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="#">3</a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="#"
+                    aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
