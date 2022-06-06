@@ -161,87 +161,13 @@
         <div class="row mt-4">
           <div class="box-table-result">
             <div class="table-historial table-responsive">
-              <table class="table table-hover">
-                <thead class="thead-color">
-                  <tr>
-                    <th>Producto</th>
-                    <th>Operador</th>
-                    <th>Fecha de concertación</th>
-                    <th># Rel/Folio</th>
-                    <th>Monto operado</th>
-                    <th>Tipo de cambio acordado</th>
-                    <th>Fecha de liquidación</th>
-                    <th>Divisa Origen</th>
-                    <th>Confirmación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Fx Spot</td>
-                    <td>Invex Bravo</td>
-                    <td>01/06/2022</td>
-                    <td>113456032</td>
-                    <td>100,00.00</td>
-                    <td>150,00.00</td>
-                    <td>01/06/2021</td>
-                    <td>USD</td>
-                    <td><input type="checkbox"></td>
-                  </tr>
-                  <tr>
-                    <td>Fx Forward</td>
-                    <td>Invex Garcia</td>
-                    <td>01/06/2022</td>
-                    <td>113456032</td>
-                    <td>120,00.00</td>
-                    <td>170,00.00</td>
-                    <td>01/06/2022</td>
-                    <td>USD</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <vue-good-table
+                :columns="columns"
+                :rows="rows"
+                :pagination-options="{
+                  enabled: true,
+                }" />
             </div>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination pagination-resultado justify-content-center">
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="#"
-                    aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="#">1</a>
-                </li>
-                <li class="page-item active">
-                  <a
-                    class="page-link"
-                    href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="#"
-                    aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </div>
@@ -251,22 +177,114 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import RowMock from './locales/rowmock.json';
 
 export default {
   name: 'App',
   data() {
     return {
       year: new Date().getFullYear(),
+      allColumns: [
+        {
+          id: 'product',
+          name: 'Producto',
+          show: true,
+        },
+        {
+          id: 'client',
+          name: 'Cliente',
+          show: true,
+        },
+        {
+          id: 'operator',
+          name: 'Operador',
+          show: true,
+        },
+        {
+          id: 'folio',
+          name: '#Ref/Folio',
+          show: true,
+        },
+        {
+          id: 'originCurrency',
+          name: 'Divisa Origen',
+          show: true,
+        },
+        {
+          id: 'monto',
+          name: 'Monto Operado',
+          show: true,
+        },
+        {
+          id: 'change',
+          name: 'Tipo de Cambio Acordado',
+          show: true,
+        },
+        {
+          id: 'dateTransiction',
+          name: 'Fecha de Transacción',
+          show: true,
+        },
+        {
+          id: 'dateLiquidation',
+          name: 'Fecha de Liquidación',
+          show: true,
+        },
+        {
+          id: 'debitAccount',
+          name: 'Cuenta Debito',
+          show: false,
+        },
+        {
+          id: 'creditAccount',
+          name: 'Cuenta Crédito',
+          show: false,
+        },
+        {
+          id: 'liquidationAccount',
+          name: 'Cuenta Liquidación',
+          show: false,
+        },
+        {
+          id: 'status',
+          name: 'Estatus',
+          show: false,
+        },
+        {
+          id: 'claveRastreo',
+          name: 'Clave Rastreo',
+          show: false,
+        },
+        {
+          id: 'tipoOrden',
+          name: 'Tipo Orden',
+          show: false,
+        },
+      ],
+      columns: [],
+      rows: [],
     };
   },
   computed: {
     ...mapState(['posts']),
+  },
+  mounted() {
+    this.getColumns();
+    this.rows = RowMock;
   },
   created() {
     this.getPosts();
   },
   methods: {
     ...mapActions(['getPosts']),
+    getColumns() {
+      this.columns = this.allColumns.map((column) => ({
+        label: column.name,
+        field: column.id,
+        thClass: 'th-custom',
+        show: column.show,
+      })).filter((column) => column.show);
+    },
   },
 };
 </script>

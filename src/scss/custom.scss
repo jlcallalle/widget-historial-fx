@@ -152,3 +152,17 @@
         color: #424242;
     }
   }
+
+  .th-custom {
+    background: #A41D36 !important;
+    border-color: #A41D36 !important;
+    color: white !important;
+  }
+
+  .vgt-table th.th-custom button:before {
+    border-top: 5px solid white !important;
+  }
+  
+  .vgt-table th.th-custom button:after {
+    border-bottom: 5px solid white !important
+  }
