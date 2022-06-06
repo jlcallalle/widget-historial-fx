@@ -169,6 +169,9 @@
                 }" />
             </div>
           </div>
+          <button @click="randomCols">
+            Random
+          </button>
         </div>
       </div>
     </div>
@@ -283,6 +286,14 @@ export default {
         field: column.id,
         thClass: 'th-custom',
         show: column.show,
+      })).filter((column) => column.show);
+    },
+    randomCols() {
+      this.columns = this.allColumns.map((column) => ({
+        label: column.name,
+        field: column.id,
+        thClass: 'th-custom',
+        show: Math.random() > 0.5,
       })).filter((column) => column.show);
     },
   },
