@@ -140,8 +140,9 @@
               </div>
               <div class="row-col mt-4 mt-md-0">
                 <button
+                  class="btn btn-primary btn-columna"
                   type="submit"
-                  class="btn btn-primary btn-columna">
+                  @click="openModalColumns">
                   <i><svg
                     width="31"
                     height="24"
@@ -166,7 +167,20 @@
                 :rows="rows"
                 :pagination-options="{
                   enabled: true,
-                }" />
+                }">
+                <template
+                  slot="table-row"
+                  slot-scope="props">
+                  <span v-if="props.column.field == 'tipoConfirmacion'">
+                    <input
+                      type="checkbox"
+                      :checked="props.formattedRow[props.column.field]">
+                  </span>
+                  <span v-else>
+                    {{ props.formattedRow[props.column.field] }}
+                  </span>
+                </template>
+              </vue-good-table>
             </div>
           </div>
           <button @click="randomCols">
@@ -175,100 +189,31 @@
         </div>
       </div>
     </div>
+    <columns-modal
+      v-if="openColumnsModal"
+      :open="openColumnsModal"
+      :columns="allColumns"
+      :accept-fn="editColumns"
+      :close-fn="closeModalColumns" />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import ColumnsModal from './components/ColumnsModal.vue';
+import ColumnsMock from './locales/columns.json';
 import RowMock from './locales/rowmock.json';
 
 export default {
   name: 'App',
+  components: {
+    ColumnsModal,
+  },
   data() {
     return {
       year: new Date().getFullYear(),
-      allColumns: [
-        {
-          id: 'product',
-          name: 'Producto',
-          show: true,
-        },
-        {
-          id: 'client',
-          name: 'Cliente',
-          show: false,
-        },
-        {
-          id: 'operator',
-          name: 'Operador',
-          show: true,
-        },
-        {
-          id: 'dateTransiction',
-          name: 'Fecha de concertacion',
-          show: true,
-        },
-        {
-          id: 'folio',
-          name: '#Ref/Folio',
-          show: true,
-        },
-        {
-          id: 'monto',
-          name: 'Monto Operado',
-          show: true,
-        },
-        {
-          id: 'change',
-          name: 'Tipo de Cambio Acordado',
-          show: true,
-        },
-        {
-          id: 'dateLiquidation',
-          name: 'Fecha de liquidación',
-          show: true,
-        },
-        {
-          id: 'originCurrency',
-          name: 'Divisa Origen',
-          show: true,
-        },
-        {
-          id: 'debitAccount',
-          name: 'Cuenta Debito',
-          show: false,
-        },
-        {
-          id: 'creditAccount',
-          name: 'Cuenta Crédito',
-          show: false,
-        },
-        {
-          id: 'liquidationAccount',
-          name: 'Cuenta Liquidación',
-          show: false,
-        },
-        {
-          id: 'status',
-          name: 'Estatus',
-          show: false,
-        },
-        {
-          id: 'claveRastreo',
-          name: 'Clave Rastreo',
-          show: false,
-        },
-        {
-          id: 'tipoOrden',
-          name: 'Tipo Orden',
-          show: false,
-        },
-        {
-          id: 'tipoConfirmacion',
-          name: 'Confirmacion',
-          show: true,
-        },
-      ],
+      openColumnsModal: false,
+      allColumns: [],
       columns: [],
       rows: [],
     };
@@ -277,6 +222,7 @@ export default {
     ...mapState(['posts']),
   },
   mounted() {
+    this.allColumns = ColumnsMock;
     this.getColumns();
     this.rows = RowMock;
   },
@@ -286,20 +232,23 @@ export default {
   methods: {
     ...mapActions(['getPosts']),
     getColumns() {
-      this.columns = this.allColumns.map((column) => ({
-        label: column.name,
-        field: column.id,
-        thClass: 'th-custom',
-        show: column.show,
-      })).filter((column) => column.show);
+      this.columns = this.allColumns.filter((column) => column.show);
     },
     randomCols() {
       this.columns = this.allColumns.map((column) => ({
-        label: column.name,
-        field: column.id,
-        thClass: 'th-custom',
+        ...column,
         show: Math.random() > 0.5,
       })).filter((column) => column.show);
+    },
+    openModalColumns() {
+      this.openColumnsModal = true;
+    },
+    closeModalColumns() {
+      this.openColumnsModal = false;
+    },
+    editColumns(columns) {
+      this.columns = columns.filter((column) => column.show);
+      this.closeModalColumns();
     },
   },
 };

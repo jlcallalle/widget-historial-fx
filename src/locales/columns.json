@@ -1,0 +1,114 @@
+[
+  {
+    "field": "product",
+    "label": "Producto",
+    "thClass": "th-custom",
+    "editable": false,
+    "show": true
+  },
+  {
+    "field": "client",
+    "label": "Cliente",
+    "thClass": "th-custom",
+    "editable": false,
+    "show": false
+  },
+  {
+    "field": "operator",
+    "label": "Operador",
+    "thClass": "th-custom",
+    "editable": false,
+    "show": true
+  },
+  {
+    "field": "dateTransiction",
+    "label": "Fecha de concertacion",
+    "editable": false,
+    "thClass": "th-custom",
+    "show": true
+  },
+  {
+    "field": "folio",
+    "label": "#Ref/Folio",
+    "thClass": "th-custom",
+    "editable": false,
+    "show": true
+  },
+  {
+    "field": "monto",
+    "label": "Monto Operado",
+    "thClass": "th-custom",
+    "editable": false,
+    "show": true
+  },
+  {
+    "field": "change",
+    "label": "Tipo de Cambio Acordado",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": true
+  },
+  {
+    "field": "dateLiquidation",
+    "label": "Fecha de liquidación",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": true
+  },
+  {
+    "field": "originCurrency",
+    "label": "Divisa Origen",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": true
+  },
+  {
+    "field": "debitAccount",
+    "label": "Cuenta Debito",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "creditAccount",
+    "label": "Cuenta Crédito",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "liquidationAccount",
+    "label": "Cuenta Liquidación",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "status",
+    "label": "Estatus",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "claveRastreo",
+    "label": "Clave Rastreo",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "tipoOrden",
+    "label": "Tipo Orden",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": false
+  },
+  {
+    "field": "tipoConfirmacion",
+    "label": "Confirmacion",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": true
+  }
+]
