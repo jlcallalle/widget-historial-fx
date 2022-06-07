@@ -10,7 +10,7 @@
         <div class="row">
           <div class="box-consultar">
             <div class="form-row">
-              <div class="form-group col-md-2">
+              <div class="form-group col-6 col-md-4 col-xl-2">
                 <label for="inputProducto">Producto</label>
                 <select
                   id="inputProducto"
@@ -23,7 +23,7 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-6 col-md-4 col-xl-2">
                 <label for="inputFecha">Año/Mes</label>
                 <select
                   id="inputFecha"
@@ -36,7 +36,7 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-6 col-md-4 col-xl-2">
                 <label for="inputEstatus">Estatus General</label>
                 <select
                   id="inputEstatus"
@@ -49,7 +49,7 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-6 col-md-4 col-xl-2">
                 <label for="inputEstatus">Usuario</label>
                 <select
                   id="inputEstatus"
@@ -62,7 +62,7 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-6 col-md-4 col-xl-2">
                 <label for="inputEstatus">Estatus Pago</label>
                 <select
                   id="inputEstatus"
@@ -75,7 +75,7 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-md-2 box-consulta-descarga">
+              <div class="form-group col-6 col-md-2 box-consulta-descarga">
                 <button
                   type="submit"
                   class="btn btn-outline-operacion">
@@ -138,7 +138,7 @@
                   </button>
                 </div>
               </div>
-              <div class="row-col">
+              <div class="row-col mt-4 mt-md-0">
                 <button
                   type="submit"
                   class="btn btn-primary btn-columna">
@@ -196,7 +196,7 @@ export default {
         {
           id: 'client',
           name: 'Cliente',
-          show: true,
+          show: false,
         },
         {
           id: 'operator',
@@ -204,13 +204,13 @@ export default {
           show: true,
         },
         {
-          id: 'folio',
-          name: '#Ref/Folio',
+          id: 'dateTransiction',
+          name: 'Fecha de concertacion',
           show: true,
         },
         {
-          id: 'originCurrency',
-          name: 'Divisa Origen',
+          id: 'folio',
+          name: '#Ref/Folio',
           show: true,
         },
         {
@@ -224,13 +224,13 @@ export default {
           show: true,
         },
         {
-          id: 'dateTransiction',
-          name: 'Fecha de Transacción',
+          id: 'dateLiquidation',
+          name: 'Fecha de liquidación',
           show: true,
         },
         {
-          id: 'dateLiquidation',
-          name: 'Fecha de Liquidación',
+          id: 'originCurrency',
+          name: 'Divisa Origen',
           show: true,
         },
         {
@@ -262,6 +262,11 @@ export default {
           id: 'tipoOrden',
           name: 'Tipo Orden',
           show: false,
+        },
+        {
+          id: 'tipoConfirmacion',
+          name: 'Confirmacion',
+          show: true,
         },
       ],
       columns: [],

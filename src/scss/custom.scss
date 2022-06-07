@@ -45,7 +45,10 @@
   .box-consulta-descarga {
     display: flex;
     align-items: flex-end;
-    justify-content: space-around;
+    justify-content: flex-start;
+    @include media-breakpoint-up(lg) { 
+      justify-content: space-around;
+    }
   }
   .icon-descarga {
     position: relative;
@@ -67,7 +70,9 @@
     border-radius: 16px;
     background-color: #fff;
     padding: 28px 20px 28px 20px;
-    width: 100%;
+    @include media-breakpoint-up(md) { 
+      width: 100%;
+    }
     .form-row {
       display: flex;
       align-items: center;
@@ -112,7 +117,11 @@
   
   .row-pills {
     display: flex;
-    gap: 40px;
+    gap: 20px 20px;
+    flex-wrap: wrap;
+    @include media-breakpoint-up(md) { 
+      gap: 20px 40px;
+    }
     /* border: 1px solid; */
   }
   
@@ -152,17 +161,43 @@
         color: #424242;
     }
   }
+ /* Style CSS Vue Good Table  */
 
-  .th-custom {
-    background: #A41D36 !important;
-    border-color: #A41D36 !important;
-    color: white !important;
-  }
-
-  .vgt-table th.th-custom button:before {
-    border-top: 5px solid white !important;
-  }
-  
-  .vgt-table th.th-custom button:after {
-    border-bottom: 5px solid white !important
+ .table-historial {
+    .vgt-table {
+      td {
+        span {
+          font-size: 14px;
+          text-align: center;
+          display: block;
+        }
+      }
+      .th-custom {
+        background: #A41D36 !important;
+        border-color: #A41D36 !important;
+        color: white !important;
+        font-size: 14px;
+        padding: 0;
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding-bottom: 10.5px;
+          padding-left: 10.5px;
+          padding-right: 21px;
+          padding-top: 10.5px;
+          height: 48px;
+          font-weight: normal;
+        }
+      }
+      th.sortable button:before {
+        display: none;
+        border-top: 5px solid white;
+      }
+      th.sortable button:after {
+        display: none;
+        border-bottom: 5px solid white
+      }
+    }
   }

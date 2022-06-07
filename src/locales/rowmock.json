@@ -14,7 +14,7 @@
     "liquidationAccount": "in",
     "status": "duis",
     "claveRastreo": 541,
-    "tipoOrden": "eiusmod"
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Zolar",
@@ -31,7 +31,8 @@
     "liquidationAccount": "est",
     "status": "aliqua",
     "claveRastreo": 789,
-    "tipoOrden": "mollit"
+    "tipoOrden": "mollit",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Hawkster",
@@ -48,7 +49,8 @@
     "liquidationAccount": "nostrud",
     "status": "quis",
     "claveRastreo": 143,
-    "tipoOrden": "id"
+    "tipoOrden": "id",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Anixang",
@@ -65,7 +67,8 @@
     "liquidationAccount": "ullamco",
     "status": "eu",
     "claveRastreo": 980,
-    "tipoOrden": "anim"
+    "tipoOrden": "anim",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Jumpstack",
@@ -82,7 +85,8 @@
     "liquidationAccount": "nostrud",
     "status": "ipsum",
     "claveRastreo": 776,
-    "tipoOrden": "anim"
+    "tipoOrden": "anim",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Sulfax",
@@ -99,7 +103,8 @@
     "liquidationAccount": "fugiat",
     "status": "cupidatat",
     "claveRastreo": 770,
-    "tipoOrden": "ullamco"
+    "tipoOrden": "ullamco",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Aquoavo",
@@ -116,7 +121,8 @@
     "liquidationAccount": "aute",
     "status": "sit",
     "claveRastreo": 853,
-    "tipoOrden": "sit"
+    "tipoOrden": "sit",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Extragen",
@@ -133,7 +139,8 @@
     "liquidationAccount": "proident",
     "status": "aute",
     "claveRastreo": 877,
-    "tipoOrden": "et"
+    "tipoOrden": "et",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Yurture",
@@ -150,7 +157,8 @@
     "liquidationAccount": "commodo",
     "status": "laborum",
     "claveRastreo": 552,
-    "tipoOrden": "irure"
+    "tipoOrden": "irure",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Visalia",
@@ -167,7 +175,8 @@
     "liquidationAccount": "nostrud",
     "status": "dolore",
     "claveRastreo": 565,
-    "tipoOrden": "mollit"
+    "tipoOrden": "mollit",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Syntac",
@@ -184,7 +193,8 @@
     "liquidationAccount": "excepteur",
     "status": "enim",
     "claveRastreo": 766,
-    "tipoOrden": "ad"
+    "tipoOrden": "ad",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Biflex",
@@ -201,7 +211,8 @@
     "liquidationAccount": "cillum",
     "status": "est",
     "claveRastreo": 101,
-    "tipoOrden": "non"
+    "tipoOrden": "non",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Zilencio",
@@ -218,7 +229,8 @@
     "liquidationAccount": "consequat",
     "status": "ullamco",
     "claveRastreo": 164,
-    "tipoOrden": "Lorem"
+    "tipoOrden": "Lorem",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Rocklogic",
@@ -235,7 +247,8 @@
     "liquidationAccount": "sit",
     "status": "et",
     "claveRastreo": 588,
-    "tipoOrden": "ad"
+    "tipoOrden": "ad",
+    "tipoConfirmacion": "test"
   },
   {
     "product": "Kraggle",
@@ -252,6 +265,7 @@
     "liquidationAccount": "dolor",
     "status": "est",
     "claveRastreo": 353,
-    "tipoOrden": "dolore"
+    "tipoOrden": "dolore",
+    "tipoConfirmacion": "test"
   }
 ]
