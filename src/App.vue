@@ -42,7 +42,7 @@
                   id="inputEstatus"
                   class="form-control">
                   <option selected>
-                    FX Spot
+                    Liquidado
                   </option>
                   <option>1</option>
                   <option>2</option>
@@ -161,12 +161,17 @@
         </div>
         <div class="row mt-4">
           <div class="box-table-result">
-            <div class="table-historial table-responsive">
+            <div class="table-historial table-responsive mb-4">
               <vue-good-table
                 :columns="columns"
                 :rows="rows"
                 :pagination-options="{
                   enabled: true,
+                  mode: 'records',
+                  nextLabel: 'Siguiente',
+                  prevLabel: 'Previo',
+                  rowsPerPageLabel: 'Filas por página',
+                  ofLabel: 'de',
                 }">
                 <template
                   slot="table-row"
@@ -183,7 +188,9 @@
               </vue-good-table>
             </div>
           </div>
-          <button @click="randomCols">
+          <button
+            class="d-none"
+            @click="randomCols">
             Random
           </button>
         </div>
