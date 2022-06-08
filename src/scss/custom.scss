@@ -45,10 +45,7 @@
   .box-consulta-descarga {
     display: flex;
     align-items: flex-end;
-    justify-content: flex-start;
-    @include media-breakpoint-up(lg) { 
-      justify-content: space-around;
-    }
+    justify-content: space-around;
   }
   .icon-descarga {
     position: relative;
@@ -57,6 +54,10 @@
   .btn-columna {
     display: flex;
     align-items: center;
+    margin-top: 20px;
+    @include media-breakpoint-up(lg) { 
+      margin-top: 0;
+    }
     
     span {
       font-size: 15px;
@@ -77,22 +78,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-  }
-  
-  .btn-pill {
-    display: flex;
-    color:#424242;
-    background: #F5F5F5;
-    border-radius: 8px;
-    padding: 13px 60px;
-    position: relative;
-    font-size: 14px;
-    line-height: 17px;
-    .close {
-      position: absolute;
-      top: 2px;
-      right: 9px; 
     }
   }
   
@@ -122,20 +107,33 @@
     @include media-breakpoint-up(md) { 
       gap: 20px 40px;
     }
-    /* border: 1px solid; */
+    @include media-breakpoint-up(lg) { 
+      display: flex;
+      flex-wrap: nowrap;
+      width: 75%;
+      overflow-x: auto;
+    }
   }
   
+   
   .btn-pill {
     display: flex;
-    color: #424242;
+    color:#424242;
     background: #F5F5F5;
     border-radius: 8px;
-    padding: 13px 55px;
+    padding: 13px 30px;
     position: relative;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 17px;
-    /* margin-right: 35px; */
-    /* width: 230px; */
+    width: 140px;
+    @include media-breakpoint-up(md) { 
+      width: 178px;
+    }
+    .close {
+      position: absolute;
+      top: 2px;
+      right: 9px; 
+    }
   }
   
   .table .thead-color th {
@@ -161,46 +159,7 @@
         color: #424242;
     }
   }
- /* Style CSS Vue Good Table  */
-
- .table-historial {
-    .vgt-table {
-      td {
-        span {
-          font-size: 14px;
-          text-align: center;
-          display: block;
-        }
-      }
-      .th-custom {
-        background: #A41D36 !important;
-        border-color: #A41D36 !important;
-        color: white !important;
-        font-size: 14px;
-        padding: 0;
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding-bottom: 10.5px;
-          padding-left: 10.5px;
-          padding-right: 21px;
-          padding-top: 10.5px;
-          height: 48px;
-          font-weight: normal;
-        }
-      }
-      th.sortable button:before {
-        display: none;
-        border-top: 5px solid white;
-      }
-      th.sortable button:after {
-        display: none;
-        border-bottom: 5px solid white
-      }
-    }
-  }
+  
 
   .modal-wrapper {
     height: 100%;
