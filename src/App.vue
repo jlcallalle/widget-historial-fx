@@ -10,7 +10,7 @@
         <div class="row">
           <div class="box-consultar">
             <div class="form-row">
-              <div class="form-group col-12 col-md-4 col-xl-2">
+              <div class="form-group col-12 col-md-4 col-xl-2 col-producto">
                 <label for="inputProducto">Producto</label>
                 <select
                   id="inputProducto"
@@ -18,21 +18,36 @@
                   <option selected>
                     FX Spot
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  <option>Forward</option>
+                  <option>Swap</option>
+                  <option>Block Trade</option>
                 </select>
               </div>
-              <div class="form-group col-12 col-md-4 col-xl-2">
+              <div class="form-group col-12 col-md-4 col-xl-2 col-date">
                 <label for="inputFecha">Año/Mes</label>
-                <input
-                  id="seleccionFecha"
-                  type="text"
-                  autocomplete="off"
-                  :value="dateCalendar"
-                  class="form-control seleccionFecha"
-                  placeholder="Seleccionar Fecha"
-                  @click="isHidden = !isHidden">
+                <div class="wrap-fecha">
+                  <input
+                    id="seleccionFecha"
+                    type="text"
+                    autocomplete="off"
+                    :value="dateCalendar"
+                    class="form-control seleccionFecha"
+                    placeholder="Seleccionar Fecha"
+                    @click="isHidden = !isHidden">
+                  <div class="icon-calendar">
+                    <svg
+                      width="18"
+                      height="21"
+                      viewBox="0 0 18 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M13 11.5H10C9.45 11.5 9 11.95 9 12.5V15.5C9 16.05 9.45 16.5 10 16.5H13C13.55 16.5 14 16.05 14 15.5V12.5C14 11.95 13.55 11.5 13 11.5ZM13 1.5V2.5H5V1.5C5 0.95 4.55 0.5 4 0.5C3.45 0.5 3 0.95 3 1.5V2.5H2C0.89 2.5 0.00999999 3.4 0.00999999 4.5L0 18.5C0 19.6 0.89 20.5 2 20.5H16C17.1 20.5 18 19.6 18 18.5V4.5C18 3.4 17.1 2.5 16 2.5H15V1.5C15 0.95 14.55 0.5 14 0.5C13.45 0.5 13 0.95 13 1.5ZM15 18.5H3C2.45 18.5 2 18.05 2 17.5V7.5H16V17.5C16 18.05 15.55 18.5 15 18.5Z"
+                        fill="#424242" />
+                    </svg>
+                  </div>
+                </div>
+
                 <div
                   v-show="isHidden"
                   class="wrapp-fecha">
@@ -46,6 +61,7 @@
                     :min-date="anioAnterior"
                     :max-date="new Date()"
                     :columns="$screens({ default: 1, lg: 2 })"
+                    :is-expanded="$screens({ default: true, lg: false })"
                     is-range />
                   <div class="row-accion-cal">
                     <button
@@ -56,7 +72,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group col-12 col-md-4 col-xl-2">
+              <div class="form-group col-12 col-md-4 col-xl-2 col-status">
                 <label for="inputEstatus">Estatus General</label>
                 <select
                   id="inputEstatus"
@@ -64,7 +80,7 @@
                   <option selected>
                     Liquidado
                   </option>
-                  <option>1</option>
+                  <option>No Liquidado</option>
                   <option>2</option>
                   <option>3</option>
                 </select>

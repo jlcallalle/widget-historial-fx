@@ -267,9 +267,9 @@
   justify-content: space-around;
   padding: 4px 10px;
   > div {
-    background-color: #F5F5F5;
+    background-color: #ECECEC;
     padding: 5px 24px;
-    border-radius: 3px;
+    border-radius: 5px;
     color: #8A8A8A;
     font-size: 14px;
   }
@@ -297,4 +297,68 @@
   font-weight: bold;
   cursor: pointer;
   z-index: 10;
+}
+
+
+
+.box-consultar .form-row .form-group {
+  &.col-producto {
+      // background-color: rgba(255,0,0,0.1);
+      @include media-breakpoint-up(lg) { 
+        margin-right: -20px;
+      }
+      select {
+        @include media-breakpoint-up(lg) { 
+            width: 80%;
+        }
+    }
+  }
+}
+.box-consultar .form-row .form-group.col-date {
+  &.col-date {
+    @include media-breakpoint-up(lg) { 
+      margin-left: -20px;
+      margin-right: 20px;
+      // background-color: rgba(0,255,0,0.1);
+    }
+    
+    .wrap-fecha { 
+      @include media-breakpoint-up(lg) {  
+        position:relative;
+        width: 140%;
+      }
+    }
+  }
+}
+
+.box-consultar .form-row .form-group {
+  &.col-status {
+    // background-color: rgba(0,0,255,0.1);
+    @include media-breakpoint-up(lg) { 
+      margin-right: -20px;
+      margin-left: 40px;
+    }
+    
+    select {
+      @include media-breakpoint-up(lg) {  
+        width: 88%; 
+      }
+    }
+  }
+}
+
+
+.icon-calendar {
+  position: absolute;
+  right: 15px;
+  top: 35px;
+  display: block;
+  @include media-breakpoint-up(md) {  
+    display: none;
+  }
+  @include media-breakpoint-up(lg) {  
+    display: block;
+    right: 8px;
+    top: 7px;
+  }
 }
