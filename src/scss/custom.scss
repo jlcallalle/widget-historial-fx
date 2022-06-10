@@ -221,3 +221,80 @@
         overflow-wrap: anywhere;
     }
 }
+
+/* Style Calendar */
+
+.seleccionFecha {
+  font-size: 14px;
+}
+
+.input-fecha {
+  input {
+    border: none;
+    width: 100%;
+    color:#8A8A8A;
+    font-size: 13px;
+    outline: none;
+  }
+}
+
+.wrapp-fecha {
+  display: table;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(218, 218, 218, 0.8);
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px 10px 0 10px;
+  position: absolute;
+  z-index: 10;
+  .vc-container.vc-blue {
+    border: none;
+    /* width: 100%;
+    height: auto; */
+  }
+  span {
+    display: flex;
+    flex-direction: column;
+    input {
+      border:none;
+      font-size: 14px;
+    }
+  }
+}
+
+.box-fecha-cal {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 10px;
+  > div {
+    background-color: #F5F5F5;
+    padding: 5px 24px;
+    border-radius: 3px;
+    color: #8A8A8A;
+    font-size: 14px;
+  }
+}
+
+.row-accion-cal {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+  position: relative;
+  button {
+    position: absolute;
+    top: -10px;
+  }
+}
+
+.link-red {
+  color: #A30234;
+  font-weight: 500;
+  font-size: 12px;
+  display: flex;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}

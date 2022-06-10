@@ -25,16 +25,36 @@
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2">
                 <label for="inputFecha">Año/Mes</label>
-                <select
-                  id="inputFecha"
-                  class="form-control">
-                  <option selected>
-                    2021 - Febrero
-                  </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
+                <input
+                  id="seleccionFecha"
+                  type="text"
+                  autocomplete="off"
+                  :value="dateCalendar"
+                  class="form-control seleccionFecha"
+                  placeholder="Seleccionar Fecha"
+                  @click="isHidden = !isHidden">
+                <div
+                  v-show="isHidden"
+                  class="wrapp-fecha">
+                  <div class="box-fecha-cal">
+                    <div>{{ fechaStart }}</div>
+                    <div>{{ fechaEnd }}</div>
+                  </div>
+                  <date-picker
+                    v-model="range"
+                    :masks="masks"
+                    :min-date="anioAnterior"
+                    :max-date="new Date()"
+                    :columns="$screens({ default: 1, lg: 2 })"
+                    is-range />
+                  <div class="row-accion-cal">
+                    <button
+                      class="link-red"
+                      @click="aceptarFecha">
+                      Aceptar
+                    </button>
+                  </div>
+                </div>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2">
                 <label for="inputEstatus">Estatus General</label>
@@ -207,6 +227,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 import ColumnsModal from './components/ColumnsModal.vue';
 import ColumnsMock from './locales/columns.json';
 import RowMock from './locales/rowmock.json';
@@ -215,9 +236,23 @@ export default {
   name: 'App',
   components: {
     ColumnsModal,
+    DatePicker,
   },
   data() {
+    const date = new Date();
+    // const month = date.getMonth();
+    const year = date.getFullYear();
     return {
+      isHidden: false,
+      calendarSelected: null,
+      masks: {
+        input: 'DD-MM-YYYY',
+      },
+      range: {
+        start: new Date(year, 4, 10),
+        end: new Date(year, 5, 10),
+      },
+      date: new Date(),
       year: new Date().getFullYear(),
       openColumnsModal: false,
       allColumns: [],
@@ -227,6 +262,30 @@ export default {
   },
   computed: {
     ...mapState(['posts']),
+    anioAnterior() {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() - 1);
+      return d.toDateString();
+    },
+    fechaStart() {
+      const valorfecha = this.range.start.toDateString();
+      const fechaFormat = valorfecha.split(' ').slice(1).join(' ');
+      return fechaFormat;
+    },
+    fechaEnd() {
+      const valorfecha = this.range.end.toDateString();
+      const fechaFormat = valorfecha.split(' ').slice(1).join(' ');
+      return fechaFormat;
+    },
+    dateCalendar() {
+      const textoDefault = 'Seleccione Fecha';
+      if (!this.calendarSelected) return textoDefault;
+      const valorfechaStart = this.range.start.toDateString();
+      const fechaFormat = valorfechaStart.split(' ').slice(1).join(' ');
+      const valorfechaEnd = this.range.end.toDateString();
+      const fechaFormat2 = valorfechaEnd.split(' ').slice(1).join(' ');
+      return `${fechaFormat} - ${fechaFormat2}`;
+    },
   },
   mounted() {
     this.allColumns = ColumnsMock;
@@ -238,6 +297,10 @@ export default {
   },
   methods: {
     ...mapActions(['getPosts']),
+    aceptarFecha() {
+      this.isHidden = false;
+      this.calendarSelected = this.range;
+    },
     getColumns() {
       this.columns = this.allColumns.filter((column) => column.show);
     },
