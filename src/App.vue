@@ -47,7 +47,6 @@
                     </svg>
                   </div>
                 </div>
-
                 <div
                   v-show="isHidden"
                   class="wrapp-fecha">
@@ -198,9 +197,26 @@
         <div class="row mt-4">
           <div class="box-table-result">
             <div class="table-historial table-responsive mb-4">
+              <thead class="draggable">
+                <draggable
+                  v-model="columns"
+                  tag="tr">
+                  <th
+                    v-for="header in columns"
+                    :key="header"
+                    style="min-width: auto; width: auto"
+                    class="th-custom sortable"
+                    :index="index"
+                    scope="col"
+                    aria-sort="descending">
+                    <span> {{ header.label }}</span>
+                  </th>
+                </draggable>
+              </thead>
               <vue-good-table
                 :columns="columns"
                 :rows="rows"
+                :is-draggable="true"
                 :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -244,6 +260,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
+import draggable from 'vuedraggable';
 import ColumnsModal from './components/ColumnsModal.vue';
 import ColumnsMock from './locales/columns.json';
 import RowMock from './locales/rowmock.json';
@@ -253,12 +270,34 @@ export default {
   components: {
     ColumnsModal,
     DatePicker,
+    draggable,
   },
   data() {
     const date = new Date();
     // const month = date.getMonth();
     const year = date.getFullYear();
     return {
+      headers: [
+        'id',
+        'name',
+        'sport',
+        'testColum',
+      ],
+      list: [
+        {
+          id: 1, name: 'Abby', sport: 'basket', testColum: 'prueba1',
+        },
+        {
+          id: 2, name: 'Brooke', sport: 'foot', testColum: 'prueba2',
+        },
+        {
+          id: 3, name: 'Courtenay', sport: 'volley', testColum: 'prueba 3',
+        },
+        {
+          id: 4, name: 'David', sport: 'rugby', testColum: 'prueba4',
+        },
+      ],
+      dragging: false,
       isHidden: false,
       calendarSelected: null,
       masks: {
@@ -344,5 +383,19 @@ export default {
 img {
   max-width: 100%;
 }
-
+.draggable-list {
+  background: #3f51b5;
+  color: #fff;
+  border: 1px solid;
+  height: 50vh;
+}
+.list-item {
+  margin: 10px;
+  padding: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+  background: #f44336;
+  display: inline-block;
+}
 </style>
