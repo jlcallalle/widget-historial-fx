@@ -181,6 +181,24 @@
                       type="checkbox"
                       :checked="props.formattedRow[props.column.field]">
                   </span>
+                  <span v-if="props.column.field == 'pdf'">
+                    <button
+                      class="btn btn-primary btn-columna"
+                      type="submit"
+                      @click="openModalPdf(pdfSelected)">
+                      <i><svg
+                        width="31"
+                        height="24"
+                        viewBox="0 0 31 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M17.9474 6.85714H0V10.2857H17.9474V6.85714ZM17.9474 0H0V3.42857H17.9474V0ZM24.4737 13.7143V6.85714H21.2105V13.7143H14.6842V17.1429H21.2105V24H24.4737V17.1429H31V13.7143H24.4737ZM0 17.1429H11.4211V13.7143H0V17.1429Z"
+                          fill="white" />
+                      </svg>
+                      </i>
+                    </button>
+                  </span>
                   <span v-else>
                     {{ props.formattedRow[props.column.field] }}
                   </span>
@@ -202,19 +220,27 @@
       :columns="allColumns"
       :accept-fn="editColumns"
       :close-fn="closeModalColumns" />
+    <pdf-modal
+      v-if="openPdfModal"
+      :open="openPdfModal"
+      :pdf="pdfSelected"
+      :close-fn="closeModalPdf" />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import ColumnsModal from './components/ColumnsModal.vue';
+import PdfModal from './components/PdfModal.vue';
 import ColumnsMock from './locales/columns.json';
 import RowMock from './locales/rowmock.json';
+import { pdfMock } from './locales/pdf';
 
 export default {
   name: 'App',
   components: {
     ColumnsModal,
+    PdfModal,
   },
   data() {
     return {
@@ -223,6 +249,8 @@ export default {
       allColumns: [],
       columns: [],
       rows: [],
+      openPdfModal: false,
+      pdfSelected: pdfMock,
     };
   },
   computed: {
@@ -253,9 +281,24 @@ export default {
     closeModalColumns() {
       this.openColumnsModal = false;
     },
+    closeModalPdf() {
+      this.openPdfModal = false;
+    },
+    openModalPdf(pdf) {
+      this.pdfSelected = pdf || '';
+      this.openPdfModal = true;
+    },
     editColumns(columns) {
       this.columns = columns.filter((column) => column.show);
       this.closeModalColumns();
+    },
+    downloadPDF(pdf) {
+      const linkSource = `data:application/pdf;base64,${pdf}`;
+      const downloadLink = document.createElement('a');
+      const fileName = 'abc.pdf';
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
     },
   },
 };

@@ -110,5 +110,12 @@
     "thClass": "th-custom",
     "editable": true,
     "show": true
+  },
+  {
+    "field": "pdf",
+    "label": "PDF",
+    "thClass": "th-custom",
+    "editable": true,
+    "show": true
   }
 ]
