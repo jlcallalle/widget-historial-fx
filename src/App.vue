@@ -49,7 +49,7 @@
                 </div>
                 <div
                   v-show="isHidden"
-                  class="wrapp-fecha">
+                  class="wrapp-fecha-rango">
                   <div class="box-fecha-cal">
                     <div>{{ fechaStart }}</div>
                     <div>{{ fechaEnd }}</div>
@@ -63,6 +63,11 @@
                     :is-expanded="$screens({ default: true, lg: false })"
                     is-range />
                   <div class="row-accion-cal">
+                    <button
+                      class="link-red"
+                      @click="borrarFecha">
+                      Borrar
+                    </button>
                     <button
                       class="link-red"
                       @click="aceptarFecha">
@@ -380,6 +385,10 @@ export default {
     aceptarFecha() {
       this.isHidden = false;
       this.calendarSelected = this.range;
+    },
+    borrarFecha() {
+      this.isHidden = false;
+      this.calendarSelected = '';
     },
     validateStatusLiquidacion(record) {
       let statusLiquidacion = 'Asignadas';
