@@ -221,3 +221,213 @@
         overflow-wrap: anywhere;
     }
 }
+
+/* Style Calendar */
+
+.seleccionFecha {
+  font-size: 14px;
+}
+
+.input-fecha {
+  input {
+    border: none;
+    width: 100%;
+    color:#8A8A8A;
+    font-size: 13px;
+    outline: none;
+  }
+}
+
+.wrapp-fecha {
+  display: table;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(218, 218, 218, 0.8);
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px 10px 0 10px;
+  position: absolute;
+  z-index: 10;
+  .vc-container.vc-blue {
+    border: none;
+    /* width: 100%;
+    height: auto; */
+  }
+  span {
+    display: flex;
+    flex-direction: column;
+    input {
+      border:none;
+      font-size: 14px;
+    }
+  }
+}
+
+.box-fecha-cal {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 10px;
+  > div {
+    background-color: #ECECEC;
+    padding: 5px 24px;
+    border-radius: 5px;
+    color: #8A8A8A;
+    font-size: 14px;
+  }
+}
+
+.row-accion-cal {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+  position: relative;
+  button {
+    position: absolute;
+    top: -10px;
+  }
+}
+
+.link-red {
+  color: #A30234;
+  font-weight: 500;
+  font-size: 12px;
+  display: flex;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
+
+
+.box-consultar .form-row .form-group {
+  &.col-producto {
+      // background-color: rgba(255,0,0,0.1);
+      @include media-breakpoint-up(lg) { 
+        margin-right: -20px;
+      }
+      select {
+        @include media-breakpoint-up(lg) { 
+            width: 80%;
+        }
+    }
+  }
+}
+.box-consultar .form-row .form-group.col-date {
+  &.col-date {
+    @include media-breakpoint-up(lg) { 
+      margin-left: -20px;
+      margin-right: 20px;
+      // background-color: rgba(0,255,0,0.1);
+    }
+    
+    .wrap-fecha { 
+      @include media-breakpoint-up(lg) {  
+        position:relative;
+        width: 140%;
+      }
+    }
+  }
+}
+
+.box-consultar .form-row .form-group {
+  &.col-status {
+    // background-color: rgba(0,0,255,0.1);
+    @include media-breakpoint-up(lg) { 
+      margin-right: -20px;
+      margin-left: 40px;
+    }
+    
+    select {
+      @include media-breakpoint-up(lg) {  
+        width: 88%; 
+      }
+    }
+  }
+}
+
+
+.icon-calendar {
+  position: absolute;
+  right: 15px;
+  top: 35px;
+  display: block;
+  @include media-breakpoint-up(md) {  
+    display: none;
+  }
+  @include media-breakpoint-up(lg) {  
+    display: block;
+    right: 8px;
+    top: 7px;
+  }
+}
+
+/* Table draggable*/
+
+.table-historial {
+  position: relative;
+}
+.draggable {
+  width: 100%;
+  display: flex;
+  background-color: rgba(255,0,0,0.1);
+  position: absolute;
+  z-index: 5;
+  .th-custom.sortable {
+    background: #a41d36;
+    border-color: #a41d36;
+    color: white;
+    font-size: 14px;
+    padding: 0;
+   
+    &.col-Producto{
+      span {
+        width: 102px;
+      }
+    }
+    &.col-Operador {
+      span {
+        padding-left: 0;
+        padding-right: 0;
+        width: 119px;
+      }
+    }
+    &.col-\#Ref\/Folio {
+      span {
+        padding-left: 0;
+        padding-right: 0;
+        width: 104px;
+      }
+    }
+    &.col-Tipo {
+      span {
+        width: 160px;
+      }
+    }
+    span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-left: 19.5px;
+    padding-right: 19.5px;
+    padding-bottom: 10.5px;
+    padding-top: 10.5px;
+    height: 48px;
+    font-weight: normal;
+    cursor: pointer;
+    }
+  }
+}
+
+table.vgt-table {
+  thead {
+    tr {
+      span {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+}
