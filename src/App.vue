@@ -205,11 +205,10 @@
                     v-for="header in columns"
                     :key="header"
                     style="min-width: auto; width: auto"
-                    class="th-custom sortable"
-                    :index="index"
+                    :class="`th-custom sortable col-${ header.label } `"
                     scope="col"
                     aria-sort="descending">
-                    <span> {{ header.label }}</span>
+                    <span>{{ header.label }}</span>
                   </th>
                 </draggable>
               </thead>

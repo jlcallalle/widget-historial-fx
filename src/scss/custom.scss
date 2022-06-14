@@ -373,16 +373,38 @@
   display: flex;
   background-color: rgba(255,0,0,0.1);
   position: absolute;
-  z-index: 10;
-  tr {
-    // display: flex;
-  }
+  z-index: 5;
   .th-custom.sortable {
     background: #a41d36;
     border-color: #a41d36;
     color: white;
     font-size: 14px;
     padding: 0;
+   
+    &.col-Producto{
+      span {
+        width: 102px;
+      }
+    }
+    &.col-Operador {
+      span {
+        padding-left: 0;
+        padding-right: 0;
+        width: 119px;
+      }
+    }
+    &.col-\#Ref\/Folio {
+      span {
+        padding-left: 0;
+        padding-right: 0;
+        width: 104px;
+      }
+    }
+    &.col-Tipo {
+      span {
+        width: 160px;
+      }
+    }
     span {
     display: flex;
     align-items: center;
