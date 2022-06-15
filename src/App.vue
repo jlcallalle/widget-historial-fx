@@ -85,8 +85,6 @@
                     Liquidado
                   </option>
                   <option>No Liquidado</option>
-                  <option>2</option>
-                  <option>3</option>
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2">
@@ -97,9 +95,6 @@
                   <option selected>
                     Nombre usuario
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2">
@@ -115,25 +110,13 @@
                   <option>3</option>
                 </select>
               </div>
-              <div class="form-group col-12 col-md-4 col-xl-2 box-consulta-descarga">
+              <div class="form-group col-auto box-consulta-descarga">
                 <button
                   type="submit"
                   class="btn btn-outline-operacion"
                   @click="getRecords">
                   Consultar
                 </button>
-                <div class="icon-descarga">
-                  <svg
-                    width="24"
-                    height="30"
-                    viewBox="0 0 24 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M23.9998 10.8333H17.3332V0.833252H7.33317V10.8333H0.666504L12.3332 22.4999L23.9998 10.8333ZM0.666504 25.8333V29.1666H23.9998V25.8333H0.666504Z"
-                      fill="#A41D36" />
-                  </svg>
-                </div>
               </div>
             </div>
           </div>
@@ -141,66 +124,136 @@
         <div class="row mt-4">
           <div class="box-filtrado">
             <div class="form-row">
-              <div class="row-pills">
-                <div class="btn btn-pill">
-                  Producto
-                  <button
-                    type="button"
-                    class="close"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="btn btn-pill">
-                  Cliente
-                  <button
-                    type="button"
-                    class="close"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="btn btn-pill">
-                  Operador
-                  <button
-                    type="button"
-                    class="close"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="btn btn-pill">
-                  #Ref/Folio
-                  <button
-                    type="button"
-                    class="close"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              </div>
               <div class="row-col">
                 <button
                   class="btn btn-primary btn-columna"
                   type="submit"
                   @click="openModalColumns">
                   <i><svg
-                    width="31"
-                    height="24"
-                    viewBox="0 0 31 24"
+                    width="18"
+                    height="16"
+                    viewBox="0 0 18 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M17.9474 6.85714H0V10.2857H17.9474V6.85714ZM17.9474 0H0V3.42857H17.9474V0ZM24.4737 13.7143V6.85714H21.2105V13.7143H14.6842V17.1429H21.2105V24H24.4737V17.1429H31V13.7143H24.4737ZM0 17.1429H11.4211V13.7143H0V17.1429Z"
-                      fill="white" />
+                      d="M3.18164 14.5909V9.5"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M3.18164 6.59091V1.5"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M9 14.5909V8.04541"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M9 5.13636V1.5"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M14.8184 14.591V10.9546"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M14.8184 8.04545V1.5"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M1 9.5H5.36364"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M6.81836 5.13623H11.182"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M12.6367 10.9546H17.0004"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
                   </svg>
-                  </i><span>Agregar Columnas</span>
+                  </i><span>Personalizar columnas</span>
                 </button>
+              </div>
+              <div class="row-btn-descarga">
+                <a
+                  href="#"
+                  class="btn-descarga">
+                  <i class="icon-descarga-info">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15 6.94536V17H5V3H10.6163L15 6.94536Z"
+                        stroke="#A41D36"
+                        stroke-width="2" />
+                      <rect
+                        x="9"
+                        y="2"
+                        width="2"
+                        height="6"
+                        fill="#A41D36" />
+                      <rect
+                        x="9"
+                        y="7"
+                        width="7"
+                        height="2"
+                        fill="#A41D36" />
+                    </svg>
+                  </i><span>Descarga CSV</span></a>
+                <a
+                  href="#"
+                  class="btn-descarga"><i class="icon-descarga-info">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15 6.94536V17H5V3H10.6163L15 6.94536Z"
+                        stroke="#A41D36"
+                        stroke-width="2" />
+                      <rect
+                        x="9"
+                        y="2"
+                        width="2"
+                        height="6"
+                        fill="#A41D36" />
+                      <rect
+                        x="9"
+                        y="7"
+                        width="7"
+                        height="2"
+                        fill="#A41D36" />
+                    </svg>
+                  </i><span>Descargar XLS</span></a>
               </div>
             </div>
           </div>
         </div>
-        <div class="row mt-4">
+        <div class="row">
           <div class="box-table-result">
             <div class="table-historial table-responsive mb-4">
               <thead class="draggable">

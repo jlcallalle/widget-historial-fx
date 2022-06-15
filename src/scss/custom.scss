@@ -60,6 +60,11 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    background: linear-gradient(167.43deg, #6B87BD 9.17%, #3B5A8D 96.28%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    z-index: 100;
+    position: relative;
     @include media-breakpoint-up(lg) { 
       margin-top: 0;
     }
@@ -72,9 +77,10 @@
   }
   
   .box-filtrado {
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+   /*  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
-    background-color: #fff;
+    background-color: #fff; */
+    // background-color: rgba(0, 0, 0, .1);
     padding: 28px 20px 28px 20px;
     @include media-breakpoint-up(md) { 
       width: 100%;
@@ -105,42 +111,7 @@
     font-size: 14px;
   }
   
-  .row-pills {
-    display: flex;
-    gap: 20px 20px;
-    flex-wrap: wrap;
-    @include media-breakpoint-up(md) { 
-      gap: 20px 40px;
-    }
-    @include media-breakpoint-up(lg) { 
-      display: flex;
-      flex-wrap: nowrap;
-      width: 75%;
-      overflow-x: auto;
-    }
-  }
-  
    
-  .btn-pill {
-    display: flex;
-    color:#424242;
-    background: #F5F5F5;
-    border-radius: 8px;
-    padding: 13px 30px;
-    position: relative;
-    font-size: 14px;
-    line-height: 17px;
-    width: 140px;
-    @include media-breakpoint-up(md) { 
-      width: 178px;
-    }
-    .close {
-      position: absolute;
-      top: 2px;
-      right: 9px; 
-    }
-  }
-  
   .table .thead-color th {
     color: white;
     background-color: #A41D36;
@@ -150,6 +121,8 @@
   }
   
   .table-historial {
+     padding-top: 80px;
+     margin-top: -60px;
     .table td {
       text-align: center;
     }
@@ -292,23 +265,16 @@
 
 .box-consultar .form-row .form-group {
   &.col-producto {
-      // background-color: rgba(255,0,0,0.1);
       @include media-breakpoint-up(lg) { 
         margin-right: -20px;
       }
-      select {
-        @include media-breakpoint-up(lg) { 
-            width: 80%;
-        }
-    }
   }
 }
 .box-consultar .form-row .form-group.col-date {
   &.col-date {
     @include media-breakpoint-up(lg) { 
-      margin-left: -20px;
+      margin-left: 20px;
       margin-right: 20px;
-      // background-color: rgba(0,255,0,0.1);
     }
     
     .wrap-fecha { 
@@ -322,7 +288,6 @@
 
 .box-consultar .form-row .form-group {
   &.col-status {
-    // background-color: rgba(0,0,255,0.1);
     @include media-breakpoint-up(lg) { 
       margin-right: -20px;
       margin-left: 40px;
@@ -363,6 +328,7 @@
   background-color: rgba(255,0,0,0.1);
   position: absolute;
   z-index: 5;
+  display: none;
   .th-custom.sortable {
     background: #a41d36;
     border-color: #a41d36;
@@ -414,9 +380,59 @@ table.vgt-table {
   thead {
     tr {
       span {
-        display: none;
-        visibility: hidden;
+        // display: none;
+        // visibility: hidden;
       }
     }
   }
+}
+/* Custom Table */
+.footer__navigation__page-info div:after {
+  content: 'Entradas';
+}
+.footer__navigation__page-info div:before {
+  content: 'Mostrando';
+}
+
+.row-btn-descarga {
+  display: flex;
+  a {
+    color: #0B0B0B;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-left: 30px;
+    &:hover {
+      text-decoration: none;
+    }
+    span {
+      margin-left: 5px;
+    }
+  }
+}
+
+.vgt-wrap__footer .footer__row-count {
+  position: absolute!important;
+  top: -80px;
+  right: 320px;
+}
+
+.vgt-wrap__footer .footer__navigation__page-info {
+  position: absolute!important;
+  left: 0!important;
+}
+
+.vgt-wrap__footer .footer__row-count__label {
+  font-size: 0!important;
+}
+
+.vgt-wrap__footer .footer__row-count__label:before {
+  content: 'Mostrar:';
+  font-size: 14px!important;
+}
+
+.vgt-wrap__footer .footer__row-count__select {
+  font-size: 14px!important;
 }
