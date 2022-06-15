@@ -2,6 +2,11 @@
   <div
     id="app"
     class="wrapper-widget">
+    <div
+      v-if="loading"
+      class="invex-loader">
+      <div class="invex-loader_spinner" />
+    </div>
     <div class="widget-historial-fx">
       <h1 class="mb-4 title-widget">
         Historial de Operaciones FX
@@ -14,6 +19,7 @@
                 <label for="inputProducto">Producto</label>
                 <select
                   id="inputProducto"
+                  :value="product"
                   class="form-control">
                   <option selected>
                     FX Spot
@@ -294,21 +300,36 @@
                       type="checkbox"
                       :checked="props.formattedRow[props.column.field]">
                   </span>
-                  <span v-else-if="props.column.field == 'pdf'">
+                  <span v-else-if="props.column.field == 'tradeconfirmation' || props.column.field =='tradebilling'">
                     <button
-                      class="btn btn-primary btn-columna"
+                      v-if="props.formattedRow[props.column.field]"
+                      class="btn"
                       type="submit"
                       @click="openModalPdf(pdfSelected)">
-                      <i><svg
-                        width="31"
-                        height="24"
-                        viewBox="0 0 31 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M17.9474 6.85714H0V10.2857H17.9474V6.85714ZM17.9474 0H0V3.42857H17.9474V0ZM24.4737 13.7143V6.85714H21.2105V13.7143H14.6842V17.1429H21.2105V24H24.4737V17.1429H31V13.7143H24.4737ZM0 17.1429H11.4211V13.7143H0V17.1429Z"
-                          fill="white" />
-                      </svg>
+                      <i class="icon-descarga-info">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15 6.94536V17H5V3H10.6163L15 6.94536Z"
+                            stroke="#A41D36"
+                            stroke-width="2" />
+                          <rect
+                            x="9"
+                            y="2"
+                            width="2"
+                            height="6"
+                            fill="#A41D36" />
+                          <rect
+                            x="9"
+                            y="7"
+                            width="7"
+                            height="2"
+                            fill="#A41D36" />
+                        </svg>
                       </i>
                     </button>
                   </span>
@@ -367,6 +388,7 @@ export default {
     // const month = date.getMonth();
     const year = date.getFullYear();
     return {
+      loading: false,
       dragging: false,
       isHidden: false,
       calendarSelected: null,
@@ -385,6 +407,7 @@ export default {
       rows: [],
       openPdfModal: false,
       pdfSelected: pdfMock,
+      product: '',
     };
   },
   computed: {
@@ -499,15 +522,18 @@ export default {
         trade_status: 'C',
         internetFolio: '9254',
         origin: 'P',
-        product: 'SWAP',
         side: 'SELL',
       };
+      if (this.product !== '' && this.product) options.product = this.product;
       try {
+        this.loading = true;
         const records = await InvexRepository.getRecords(options);
         if (records.code === 900) {
           this.rows = this.formatRecords(records.data.catalogList);
         }
+        this.loading = false;
       } catch (e) {
+        this.loading = false;
         // eslint-disable-next-line no-console
         console.log('records', e);
       }

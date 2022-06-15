@@ -29,6 +29,14 @@
                     :src="generatePdf()" />
                 </div>
               </div>
+              <div class="modal-footer justify-content-center">
+                <button
+                  type="button"
+                  class="btn btn-descarga-pdf"
+                  @click="downloadPDF">
+                  Descargar
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -68,6 +76,14 @@ export default {
         arr[i] = binStr.charCodeAt(i);
       }
       return new Blob([arr], { type });
+    },
+    downloadPDF() {
+      const linkSource = `data:application/pdf;base64,${this.pdf}`;
+      const downloadLink = document.createElement('a');
+      const fileName = 'abc.pdf';
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
     },
   },
 };

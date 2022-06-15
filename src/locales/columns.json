@@ -154,7 +154,7 @@
     "show": false
   },
   {
-    "field": "tradeStatus",
+    "field": "tipoConfirmacion",
     "label": "Confirmar Operación",
     "thClass": "th-custom",
     "editable": true,
