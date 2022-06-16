@@ -202,7 +202,8 @@
               <div class="row-btn-descarga">
                 <a
                   href="#"
-                  class="btn-descarga">
+                  class="btn-descarga"
+                  @click.prevent="exportCsv()">
                   <i class="icon-descarga-info">
                     <svg
                       width="20"
@@ -230,7 +231,8 @@
                   </i><span>Descarga CSV</span></a>
                 <a
                   href="#"
-                  class="btn-descarga"><i class="icon-descarga-info">
+                  class="btn-descarga"
+                  @click.prevent="exportExcel()"><i class="icon-descarga-info">
                     <svg
                       width="20"
                       height="20"
@@ -365,6 +367,7 @@
 <script>
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 import draggable from 'vuedraggable';
+import XLSX from 'xlsx';
 import Repository from './repositories/RepositoryFactory';
 import ColumnsModal from './components/ColumnsModal.vue';
 import PdfModal from './components/PdfModal.vue';
@@ -442,7 +445,7 @@ export default {
     // this.rows = RowMock;
   },
   created() {
-    this.getPosts();
+    // this.getPosts();
   },
   methods: {
     dateToFormatApi(date) {
@@ -571,6 +574,20 @@ export default {
       downloadLink.href = linkSource;
       downloadLink.download = fileName;
       downloadLink.click();
+    },
+    exportExcel() {
+      const data = XLSX.utils.json_to_sheet(this.columns);
+      const workbook = XLSX.utils.book_new();
+      const filename = 'historial-de-operaciones';
+      XLSX.utils.book_append_sheet(workbook, data, filename);
+      XLSX.writeFile(workbook, `${filename}.xlsx`);
+    },
+    exportCsv() {
+      const data = XLSX.utils.json_to_sheet(this.rows);
+      const workbook = XLSX.utils.book_new();
+      const filename = 'historial-de-operaciones';
+      XLSX.utils.book_append_sheet(workbook, data, filename);
+      XLSX.writeFile(workbook, `${filename}.csv`);
     },
   },
 };
