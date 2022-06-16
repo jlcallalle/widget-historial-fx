@@ -30,7 +30,7 @@
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2 col-date">
-                <label for="inputFecha">Año/Mes</label>
+                <label for="inputFecha">Periodo</label>
                 <div class="wrap-fecha">
                   <input
                     id="seleccionFecha"
@@ -228,7 +228,7 @@
                         height="2"
                         fill="#A41D36" />
                     </svg>
-                  </i><span>Descarga CSV</span></a>
+                  </i><span>Descargar CSV</span></a>
                 <a
                   href="#"
                   class="btn-descarga"
