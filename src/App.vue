@@ -388,8 +388,10 @@ export default {
   },
   data() {
     const date = new Date();
-    // const month = date.getMonth();
+    const month = date.getMonth();
+    const monthPrev = (date.getMonth() - 1);
     const year = date.getFullYear();
+    const day = date.getDate();
     return {
       loading: false,
       dragging: false,
@@ -399,8 +401,8 @@ export default {
         input: 'DD-MM-YYYY',
       },
       range: {
-        start: new Date(year, 4, 10),
-        end: new Date(year, 5, 10),
+        start: new Date(year, monthPrev, day),
+        end: new Date(year, month, day),
       },
       date: new Date(),
       year: new Date().getFullYear(),
@@ -420,21 +422,30 @@ export default {
       return d.toDateString();
     },
     fechaStart() {
-      const valorfecha = this.range.start.toDateString();
+      const optionFecha = {
+        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+      };
+      const valorfecha = this.range.start.toLocaleDateString('es-ES', optionFecha);
       const fechaFormat = valorfecha.split(' ').slice(1).join(' ');
       return fechaFormat;
     },
     fechaEnd() {
-      const valorfecha = this.range.end.toDateString();
+      const optionFecha = {
+        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+      };
+      const valorfecha = this.range.end.toLocaleDateString('es-ES', optionFecha);
       const fechaFormat = valorfecha.split(' ').slice(1).join(' ');
       return fechaFormat;
     },
     dateCalendar() {
+      const optionFecha = {
+        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+      };
       const textoDefault = 'Seleccione Fecha';
       if (!this.calendarSelected) return textoDefault;
-      const valorfechaStart = this.range.start.toDateString();
+      const valorfechaStart = this.range.start.toLocaleDateString('es-ES', optionFecha);
       const fechaFormat = valorfechaStart.split(' ').slice(1).join(' ');
-      const valorfechaEnd = this.range.end.toDateString();
+      const valorfechaEnd = this.range.end.toLocaleDateString('es-ES', optionFecha);
       const fechaFormat2 = valorfechaEnd.split(' ').slice(1).join(' ');
       return `${fechaFormat} - ${fechaFormat2}`;
     },
@@ -576,18 +587,22 @@ export default {
       downloadLink.click();
     },
     exportExcel() {
-      const data = XLSX.utils.json_to_sheet(this.columns);
-      const workbook = XLSX.utils.book_new();
-      const filename = 'historial-de-operaciones';
-      XLSX.utils.book_append_sheet(workbook, data, filename);
-      XLSX.writeFile(workbook, `${filename}.xlsx`);
+      if (this.rows.length !== 0) {
+        const data = XLSX.utils.json_to_sheet(this.rows);
+        const workbook = XLSX.utils.book_new();
+        const filename = 'historial-de-operaciones';
+        XLSX.utils.book_append_sheet(workbook, data, filename);
+        XLSX.writeFile(workbook, `${filename}.xlsx`);
+      }
     },
     exportCsv() {
-      const data = XLSX.utils.json_to_sheet(this.rows);
-      const workbook = XLSX.utils.book_new();
-      const filename = 'historial-de-operaciones';
-      XLSX.utils.book_append_sheet(workbook, data, filename);
-      XLSX.writeFile(workbook, `${filename}.csv`);
+      if (this.rows.length !== 0) {
+        const data = XLSX.utils.json_to_sheet(this.rows);
+        const workbook = XLSX.utils.book_new();
+        const filename = 'historial-de-operaciones';
+        XLSX.utils.book_append_sheet(workbook, data, filename);
+        XLSX.writeFile(workbook, `${filename}.csv`);
+      }
     },
   },
 };
