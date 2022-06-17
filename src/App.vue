@@ -281,7 +281,7 @@
               </thead>
               <vue-good-table
                 :columns="columns"
-                :rows="rows"
+                :rows="rowUpdate"
                 :is-draggable="true"
                 :pagination-options="{
                   enabled: true,
@@ -410,6 +410,7 @@ export default {
       allColumns: [],
       columns: [],
       rows: [],
+      rowUpdate: [],
       openPdfModal: false,
       pdfSelected: pdfMock,
       product: '',
@@ -544,6 +545,9 @@ export default {
         const records = await InvexRepository.getRecords(options);
         if (records.code === 900) {
           this.rows = this.formatRecords(records.data.catalogList);
+          const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount.slice(obj.debitAccount.length - 4)}` }));
+          const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount.slice(obj.creditAccount.length - 4)}` }));
+          this.rowUpdate = formatCredit;
         }
         this.loading = false;
       } catch (e) {
