@@ -36,7 +36,7 @@
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2 col-date">
-                <label for="inputFecha">Año/Mes</label>
+                <label for="inputFecha">Periodo</label>
                 <div class="wrap-fecha">
                   <input
                     id="seleccionFecha"
@@ -234,7 +234,7 @@
                         height="2"
                         fill="#A41D36" />
                     </svg>
-                  </i><span>Descarga CSV</span></a>
+                  </i><span>Descargar CSV</span></a>
                 <a
                   href="#"
                   class="btn-descarga"
@@ -287,7 +287,7 @@
               </thead>
               <vue-good-table
                 :columns="columns"
-                :rows="rows"
+                :rows="rowUpdate"
                 :is-draggable="true"
                 :pagination-options="{
                   enabled: true,
@@ -416,6 +416,7 @@ export default {
       allColumns: [],
       columns: [],
       rows: [],
+      rowUpdate: [],
       openPdfModal: false,
       pdfSelected: pdfMock,
       product: '',
@@ -577,6 +578,9 @@ export default {
         const records = await InvexRepository.getRecords(options);
         if (records.code === 900) {
           this.rows = this.formatRecords(records.data.catalogList);
+          const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount.slice(obj.debitAccount.length - 4)}` }));
+          const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount.slice(obj.creditAccount.length - 4)}` }));
+          this.rowUpdate = formatCredit;
         }
         this.loading = false;
       } catch (e) {

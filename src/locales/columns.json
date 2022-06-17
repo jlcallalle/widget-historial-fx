@@ -2,118 +2,118 @@
   {
     "field": "product",
     "label": "Producto",
-    "thClass": "th-custom",
+    "thClass": "th-custom producto",
     "editable": true,
     "show": true
   },
   {
     "field": "ordType",
     "label": "Tipo Orden",
-    "thClass": "th-custom",
+    "thClass": "th-custom tipo-orden",
     "editable": true,
     "show": false
   },
   {
     "field": "canal",
     "label": "Canal",
-    "thClass": "th-custom",
+    "thClass": "th-custom canal",
     "editable": true,
     "show": false
   },
   {
     "field": "trader",
     "label": "Operador",
-    "thClass": "th-custom",
+    "thClass": "th-custom operador",
     "editable": true,
     "show": true
   },
   {
     "field": "trader",
     "label": "Trader",
-    "thClass": "th-custom",
+    "thClass": "th-custom trader",
     "editable": true,
     "show": true
   },
   {
     "field": "transactionDate",
     "label": "Fecha de concertación",
-    "thClass": "th-custom",
+    "thClass": "th-custom fecha-concertacion",
     "editable": true,
     "show": true
   },
   {
     "field": "orderID",
     "label": "Folio",
-    "thClass": "th-custom",
+    "thClass": "th-custom folio",
     "editable": true,
     "show": true
   },
   {
     "field": "orderQty",
     "label": "Monto Operado",
-    "thClass": "th-custom",
+    "thClass": "th-custom moto-operado",
     "editable": true,
     "show": true
   },
   {
     "field": "currency",
     "label": "Divisa de cotización",
-    "thClass": "th-custom",
+    "thClass": "th-custom divisa-cotizacion",
     "editable": true,
     "show": true
   },
   {
     "field": "lastPx",
     "label": "Tipo de cambio acordado",
-    "thClass": "th-custom",
+    "thClass": "th-custom tipo-cambio",
     "editable": true,
     "show": true
   },
   {
     "field": "entry_date",
     "label": "Fecha de operación",
-    "thClass": "th-custom",
+    "thClass": "th-custom fecha-operacion",
     "editable": true,
     "show": false
   },
   {
     "field": "settlDate",
     "label": "Fecha de liquidación",
-    "thClass": "th-custom",
+    "thClass": "th-custom fecha-liquidacion",
     "editable": true,
     "show": true
   },
   {
     "field": "tradeStatus",
     "label": "Estatus",
-    "thClass": "th-custom",
+    "thClass": "th-custom status",
     "editable": true,
     "show": true
   },
   {
     "field": "debitAccount",
     "label": "Cuenta debito",
-    "thClass": "th-custom",
+    "thClass": "th-custom cuenta-debito",
     "editable": true,
     "show": false
   },
   {
     "field": "creditAccount",
     "label": "Cuenta crédito",
-    "thClass": "th-custom",
+    "thClass": "th-custom cuenta-credito",
     "editable": true,
     "show": false
   },
   {
     "field": "statusLiquidacion",
     "label": "Estatus Instrucciones de Liquidación",
-    "thClass": "th-custom",
+    "thClass": "th-custom status-liquidacion",
     "editable": true,
     "show": false
   },
   {
     "field": "statusOrigen",
-    "label": "Estatus Cuenta Origen",
+    "label": "Estatus Cuenta status-origen",
     "thClass": "th-custom",
     "editable": true,
     "show": false
@@ -121,42 +121,42 @@
   {
     "field": "statusDestino",
     "label": "Estatus Cuenta Destino",
-    "thClass": "th-custom",
+    "thClass": "th-custom status-destino",
     "editable": true,
     "show": false
   },
   {
     "field": "statusGeneral",
     "label": "Estatus General",
-    "thClass": "th-custom",
+    "thClass": "th-custom status-general",
     "editable": true,
     "show": false
   },
   {
     "field": "traceNumber",
     "label": "Clave Rastreo",
-    "thClass": "th-custom",
+    "thClass": "th-custom clave-rastreo",
     "editable": true,
     "show": false
   },
   {
     "field": "tradeconfirmation",
     "label": "Ver Carta confirmación",
-    "thClass": "th-custom",
+    "thClass": "th-custom carta-confirma",
     "editable": true,
     "show": false
   },
   {
     "field": "tradebilling",
     "label": "Ver Factura",
-    "thClass": "th-custom",
+    "thClass": "th-custom ver-factura",
     "editable": true,
     "show": false
   },
   {
     "field": "tipoConfirmacion",
     "label": "Confirmar Operación",
-    "thClass": "th-custom",
+    "thClass": "th-custom confirma-operacion",
     "editable": true,
     "show": true,
     "check": true

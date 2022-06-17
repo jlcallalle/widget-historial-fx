@@ -23,7 +23,7 @@
             <div class="modal-body d-flex flex-column">
               <h5
                 class="modal-title">
-                Agregar columnas
+                Personalizar columnas
               </h5>
               <div class="container">
                 <p>Selecciona las columnas que deseas visualizar:</p>
