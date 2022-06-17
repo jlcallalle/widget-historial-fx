@@ -28,7 +28,7 @@
                     Seleccione un producto
                   </option>
                   <option
-                    v-for="(value, key, index) in operations"
+                    v-for="(value, key, index) in products"
                     :key="index"
                     :value="value.productCode">
                     {{ value.productCode }}
@@ -420,7 +420,36 @@ export default {
       openPdfModal: false,
       pdfSelected: pdfMock,
       product: '',
-      products: [],
+      products: [
+        {
+          productCode: 'SPOT',
+          productDescription: 'FX SPOT',
+        },
+        {
+          productCode: 'FORWARD',
+          productDescription: 'FX FORWARD',
+        },
+        {
+          productCode: 'SWAP',
+          productDescription: 'FX SWAPS',
+        },
+        {
+          productCode: 'NDF',
+          productDescription: 'NDF',
+        },
+        {
+          productCode: 'BLOCKTRADE',
+          productDescription: 'BLOCK TRADE',
+        },
+        {
+          productCode: 'LIMITORDER',
+          productDescription: 'LIMIT ORDER',
+        },
+        {
+          productCode: 'MARKETORDER',
+          productDescription: 'MARKET ORDER',
+        },
+      ],
     };
   },
   computed: {
@@ -459,7 +488,6 @@ export default {
     },
   },
   mounted() {
-    this.getOperations();
     this.allColumns = ColumnsMock;
     this.getColumns();
     // this.rows = RowMock;
@@ -468,31 +496,6 @@ export default {
     // this.getPosts();
   },
   methods: {
-    async getOperations() {
-      this.loading = true;
-      try {
-        const operations = await InvexRepository.getOperations();
-        this.operations = operations.operationTypeResponseInterface.body.operationTypeResponse.return.catalogList;
-        this.loading = false;
-      } catch (e) {
-        console.log('error', e);
-        this.loading = false;
-        this.operations = [
-          {
-            productCode: 'SPOT',
-            productDescription: 'SPOT',
-          },
-          {
-            productCode: 'FORWARD',
-            productDescription: 'FORWARD',
-          },
-          {
-            productCode: 'SWAP',
-            productDescription: 'SWAPS',
-          },
-        ];
-      }
-    },
     dateToFormatApi(date) {
       const formatDate = new Date(date);
       return formatDate.toISOString().split('T')[0];
