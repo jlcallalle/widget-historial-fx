@@ -20,13 +20,19 @@
                 <select
                   id="inputProducto"
                   :value="product"
-                  class="form-control">
-                  <option selected>
-                    FX Spot
+                  class="form-control"
+                  @change="seleccionarOperacion">
+                  <option
+                    value=""
+                    selected>
+                    Seleccione un producto
                   </option>
-                  <option>Forward</option>
-                  <option>Swap</option>
-                  <option>Block Trade</option>
+                  <option
+                    v-for="(value, key, index) in operations"
+                    :key="index"
+                    :value="value.productCode">
+                    {{ value.productCode }}
+                  </option>
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2 col-date">
@@ -413,6 +419,7 @@ export default {
       openPdfModal: false,
       pdfSelected: pdfMock,
       product: '',
+      products: [],
     };
   },
   computed: {
@@ -451,6 +458,7 @@ export default {
     },
   },
   mounted() {
+    this.getOperations();
     this.allColumns = ColumnsMock;
     this.getColumns();
     // this.rows = RowMock;
@@ -459,6 +467,31 @@ export default {
     // this.getPosts();
   },
   methods: {
+    async getOperations() {
+      this.loading = true;
+      try {
+        const operations = await InvexRepository.getOperations();
+        this.operations = operations.operationTypeResponseInterface.body.operationTypeResponse.return.catalogList;
+        this.loading = false;
+      } catch (e) {
+        console.log('error', e);
+        this.loading = false;
+        this.operations = [
+          {
+            productCode: 'SPOT',
+            productDescription: 'SPOT',
+          },
+          {
+            productCode: 'FORWARD',
+            productDescription: 'FORWARD',
+          },
+          {
+            productCode: 'SWAP',
+            productDescription: 'SWAPS',
+          },
+        ];
+      }
+    },
     dateToFormatApi(date) {
       const formatDate = new Date(date);
       return formatDate.toISOString().split('T')[0];
@@ -603,6 +636,9 @@ export default {
         XLSX.utils.book_append_sheet(workbook, data, filename);
         XLSX.writeFile(workbook, `${filename}.csv`);
       }
+    },
+    seleccionarOperacion(ev) {
+      this.product = ev.target.value;
     },
   },
 };

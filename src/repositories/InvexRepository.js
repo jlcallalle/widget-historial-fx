@@ -6,4 +6,7 @@ export default {
   getRecords(options) {
     return InvexClient.post(`${prefixUrl}/consultaHistorial`, options);
   },
+  getOperations(network = 'FX') {
+    return InvexClient.get(`${prefixUrl}/lista-operaciones?network=${network}`);
+  },
 };
