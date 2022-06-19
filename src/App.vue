@@ -310,10 +310,9 @@
                   </span>
                   <span v-else-if="props.column.field == 'tradeconfirmation' || props.column.field =='tradebilling'">
                     <button
-                      v-if="props.formattedRow[props.column.field]"
                       class="btn"
                       type="submit"
-                      @click="openModalPdf(pdfSelected)">
+                      @click="openModalPdf(props.formattedRow, props.column.field)">
                       <i class="icon-descarga-info">
                         <svg
                           width="20"
@@ -366,6 +365,7 @@
       v-if="openPdfModal"
       :open="openPdfModal"
       :pdf="pdfSelected"
+      :pdf-name="pdfName"
       :close-fn="closeModalPdf" />
   </div>
 </template>
@@ -374,6 +374,7 @@
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 import draggable from 'vuedraggable';
 import XLSX from 'xlsx';
+import liquidParser from './liquid/liquidParser';
 import Repository from './repositories/RepositoryFactory';
 import ColumnsModal from './components/ColumnsModal.vue';
 import PdfModal from './components/PdfModal.vue';
@@ -383,6 +384,7 @@ import { pdfMock } from './locales/pdf';
 
 // eslint-disable-next-line no-unused-vars
 const InvexRepository = Repository.get('invex');
+const ENVIROMENT = liquidParser.parse('{{ vars.enviroment }}');
 
 export default {
   name: 'App',
@@ -419,6 +421,7 @@ export default {
       rowUpdate: [],
       openPdfModal: false,
       pdfSelected: pdfMock,
+      pdfName: 'abc.pdf',
       product: '',
       products: [
         {
@@ -450,6 +453,8 @@ export default {
           productDescription: 'MARKET ORDER',
         },
       ],
+      token: '',
+      user: null,
     };
   },
   computed: {
@@ -487,7 +492,18 @@ export default {
       return `${fechaFormat} - ${fechaFormat2}`;
     },
   },
-  mounted() {
+  async mounted() {
+    if (ENVIROMENT === 'production') {
+      this.getToken();
+      await this.validateUser();
+    } else {
+      this.user = {
+        data: {
+          user360T: 'INVEXCOMP1.TEST',
+          internetFolio: '9254',
+        },
+      };
+    }
     this.allColumns = ColumnsMock;
     this.getColumns();
     // this.rows = RowMock;
@@ -496,6 +512,26 @@ export default {
     // this.getPosts();
   },
   methods: {
+    async validateUser() {
+      this.loading = true;
+      try {
+        const user = await InvexRepository.validateUser({
+          token: this.token,
+        });
+        if (!user) window.location.href = 'https://cdincom03.invexgf.com/';
+        this.user = user;
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        window.location.href = 'https://cdincom03.invexgf.com/';
+      }
+    },
+    getToken() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const token = urlParams.get('token');
+      this.token = token;
+    },
     dateToFormatApi(date) {
       const formatDate = new Date(date);
       return formatDate.toISOString().split('T')[0];
@@ -566,12 +602,13 @@ export default {
     async getRecords() {
       const fromDate = this.dateToFormatApi(this.range.start);
       const toDate = this.dateToFormatApi(this.range.end);
+      const { user360T, internetFolio } = this.user.data;
       const options = {
         fromDate,
         toDate,
-        user360T: 'INVEXCOMP1.TEST',
+        user360T,
         trade_status: 'C',
-        internetFolio: '9254',
+        internetFolio,
         origin: 'P',
         side: 'SELL',
       };
@@ -610,9 +647,36 @@ export default {
     closeModalPdf() {
       this.openPdfModal = false;
     },
-    openModalPdf(pdf) {
-      this.pdfSelected = pdf || '';
-      this.openPdfModal = true;
+    // eslint-disable-next-line no-unused-vars
+    async openModalPdf(record, key) {
+      try {
+        this.loading = true;
+        // const year = record.transactionDate.split('/')[2];
+        // const month = record.transactionDate.split('/')[1].replace(/^0+/, '');
+        // const body = {
+        //   year,
+        //   month,
+        //   documentName: record[key],
+        // };
+        const body = {
+          year: '2022',
+          month: '5',
+          documentName: 'T3770230-Confirm-20220510-093459-Email-385876.pdf',
+        };
+        this.pdfName = body.documentName;
+        const response = await InvexRepository.getDocument(body);
+        // eslint-disable-next-line no-console
+        console.log('response', response);
+        this.loading = false;
+        if (response.code === 0) {
+          this.pdfSelected = response.data.documentContent;
+          this.openPdfModal = true;
+        }
+      } catch (e) {
+        this.loading = false;
+        // eslint-disable-next-line no-console
+        console.log('openModalPdf', e);
+      }
     },
     editColumns(columns) {
       this.columns = columns.filter((column) => column.show);
@@ -621,9 +685,8 @@ export default {
     downloadPDF(pdf) {
       const linkSource = `data:application/pdf;base64,${pdf}`;
       const downloadLink = document.createElement('a');
-      const fileName = 'abc.pdf';
       downloadLink.href = linkSource;
-      downloadLink.download = fileName;
+      downloadLink.download = this.pdfName;
       downloadLink.click();
     },
     exportExcel() {
