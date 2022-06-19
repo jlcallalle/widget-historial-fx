@@ -625,8 +625,6 @@ export default {
         this.loading = false;
       } catch (e) {
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log('records', e);
       }
     },
     getColumns() {
@@ -665,8 +663,6 @@ export default {
         };
         this.pdfName = body.documentName;
         const response = await InvexRepository.getDocument(body);
-        // eslint-disable-next-line no-console
-        console.log('response', response);
         this.loading = false;
         if (response.code === 0) {
           this.pdfSelected = response.data.documentContent;
@@ -674,8 +670,6 @@ export default {
         }
       } catch (e) {
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log('openModalPdf', e);
       }
     },
     editColumns(columns) {
