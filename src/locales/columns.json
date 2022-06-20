@@ -92,13 +92,8 @@
   },
   {
     "field": "debitAccount",
-<<<<<<< HEAD
-    "label": "Cuenta débito",
-    "thClass": "th-custom",
-=======
     "label": "Cuenta debito",
     "thClass": "th-custom cuenta-debito",
->>>>>>> 3ecb8847ef2ce1908c023454e72676ad22c59de3
     "editable": true,
     "show": false
   },
