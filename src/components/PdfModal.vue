@@ -54,6 +54,10 @@ export default {
       type: String,
       default: '',
     },
+    pdfName: {
+      type: String,
+      default: 'abc.pdf',
+    },
     closeFn: {
       type: Function,
       default: () => {},
@@ -80,9 +84,8 @@ export default {
     downloadPDF() {
       const linkSource = `data:application/pdf;base64,${this.pdf}`;
       const downloadLink = document.createElement('a');
-      const fileName = 'abc.pdf';
       downloadLink.href = linkSource;
-      downloadLink.download = fileName;
+      downloadLink.download = this.pdfName;
       downloadLink.click();
     },
   },
