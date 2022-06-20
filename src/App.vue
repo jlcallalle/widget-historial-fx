@@ -374,7 +374,7 @@
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 import draggable from 'vuedraggable';
 import XLSX from 'xlsx';
-import liquidParser from './liquid/liquidParser';
+// import liquidParser from './liquid/liquidParser';
 import Repository from './repositories/RepositoryFactory';
 import ColumnsModal from './components/ColumnsModal.vue';
 import PdfModal from './components/PdfModal.vue';
@@ -384,7 +384,8 @@ import { pdfMock } from './locales/pdf';
 
 // eslint-disable-next-line no-unused-vars
 const InvexRepository = Repository.get('invex');
-const ENVIROMENT = liquidParser.parse('{{ vars.enviroment }}');
+// const ENVIROMENT = liquidParser.parse('{{ vars.enviroment }}');
+const ENVIROMENT = 'production';
 
 export default {
   name: 'App',
@@ -492,10 +493,9 @@ export default {
       return `${fechaFormat} - ${fechaFormat2}`;
     },
   },
-  async mounted() {
+  mounted() {
     if (ENVIROMENT === 'production') {
-      this.getToken();
-      await this.validateUser();
+      this.validateUser();
     } else {
       this.user = {
         data: {
@@ -512,25 +512,14 @@ export default {
     // this.getPosts();
   },
   methods: {
-    async validateUser() {
+    validateUser() {
       this.loading = true;
-      try {
-        const user = await InvexRepository.validateUser({
-          token: this.token,
-        });
-        if (!user) window.location.href = 'https://cdincom03.invexgf.com/';
-        this.user = user;
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
+      if (localStorage.getItem('userData') === null) {
         window.location.href = 'https://cdincom03.invexgf.com/';
+      } else {
+        this.loading = false;
+        this.user = JSON.parse(localStorage.getItem('userData'));
       }
-    },
-    getToken() {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const token = urlParams.get('token');
-      this.token = token;
     },
     dateToFormatApi(date) {
       const formatDate = new Date(date);
