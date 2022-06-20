@@ -92,7 +92,7 @@
   },
   {
     "field": "debitAccount",
-    "label": "Cuenta debito",
+    "label": "Cuenta débito",
     "thClass": "th-custom",
     "editable": true,
     "show": false
