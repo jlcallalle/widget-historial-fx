@@ -88,7 +88,7 @@
     "label": "Estatus",
     "thClass": "th-custom status",
     "editable": true,
-    "show": true
+    "show": false
   },
   {
     "field": "debitAccount",

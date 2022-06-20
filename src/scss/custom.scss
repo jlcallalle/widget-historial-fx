@@ -32,8 +32,11 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
     background-color: #fff;
-    padding: 28px 20px 25px 20px;
+    padding: 28px 20px 20px 20px;
     width: 100%;
+    @include media-breakpoint-up(md) { 
+      padding: 28px 20px 25px 20px;
+  }
     .form-row > [class*="col-"] {
       @include media-breakpoint-up(md) { 
         padding-right: 15px;
@@ -59,12 +62,15 @@
   .btn-columna {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    
     background: linear-gradient(167.43deg, #6B87BD 9.17%, #3B5A8D 96.28%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;
     z-index: 10;
     position: relative;
+    @include media-breakpoint-up(md) { 
+      margin-top: 20px;
+    }
     @include media-breakpoint-up(lg) { 
       margin-top: 0;
     }
@@ -77,18 +83,19 @@
   }
   
   .box-filtrado {
-   /*  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-    border-radius: 16px;
-    background-color: #fff; */
-    // background-color: rgba(0, 0, 0, .1);
-    padding: 28px 20px 28px 20px;
+    padding: 0 10px;
     @include media-breakpoint-up(md) { 
+      padding: 28px 20px 28px 20px;
       width: 100%;
     }
     .form-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      flex-direction: column;
+      @include media-breakpoint-up(md) { 
+        flex-direction: row;
+        align-items: center;
+      }
     }
   }
   
@@ -390,6 +397,10 @@ table.vgt-table {
 .row-btn-descarga {
   display: flex;
   z-index: 11;
+  margin-top: 20px;
+  @include media-breakpoint-up(lg) {  
+    margin-top: 0;
+  }
   a {
     color: #0B0B0B;
     font-size: 14px;
@@ -397,7 +408,11 @@ table.vgt-table {
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    margin-left: 30px;
+    margin-right: 30px;
+    @include media-breakpoint-up(md) {  
+      margin-left: 30px;
+      margin-right: 0;
+    }
     &:hover {
       text-decoration: none;
     }
