@@ -374,7 +374,7 @@
 import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 import draggable from 'vuedraggable';
 import XLSX from 'xlsx';
-// import liquidParser from './liquid/liquidParser';
+import liquidParser from './liquid/liquidParser';
 import Repository from './repositories/RepositoryFactory';
 import ColumnsModal from './components/ColumnsModal.vue';
 import PdfModal from './components/PdfModal.vue';
@@ -384,8 +384,7 @@ import { pdfMock } from './locales/pdf';
 
 // eslint-disable-next-line no-unused-vars
 const InvexRepository = Repository.get('invex');
-// const ENVIROMENT = liquidParser.parse('{{ vars.enviroment }}');
-const ENVIROMENT = 'production';
+const ENVIROMENT = liquidParser.parse('{{ vars.enviroment }}');
 
 export default {
   name: 'App',
