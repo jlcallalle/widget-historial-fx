@@ -15,4 +15,10 @@ export default {
   getDocument(body) {
     return InvexClient.post(`${prefixUrl}/getDocumentContent`, body);
   },
+  downloadPdf(body) {
+    return InvexClient.post(`${prefixUrl}/descargarPDF`, body);
+  },
+  downloadXml(body) {
+    return InvexClient.post(`${prefixUrl}/descargarXML`, body);
+  },
 };

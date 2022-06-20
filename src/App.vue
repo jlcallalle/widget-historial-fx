@@ -308,11 +308,75 @@
                       type="checkbox"
                       :checked="props.formattedRow[props.column.field]">
                   </span>
-                  <span v-else-if="props.column.field == 'tradeconfirmation' || props.column.field =='tradebilling'">
+                  <span v-else-if="props.column.field == 'tradeconfirmation'">
                     <button
+                      v-if="props.formattedRow[props.column.field]"
                       class="btn"
-                      type="submit"
-                      @click="openModalPdf(props.formattedRow, props.column.field)">
+                      @click="openModalPdf(props.formattedRow)">
+                      <i class="icon-descarga-info">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15 6.94536V17H5V3H10.6163L15 6.94536Z"
+                            stroke="#A41D36"
+                            stroke-width="2" />
+                          <rect
+                            x="9"
+                            y="2"
+                            width="2"
+                            height="6"
+                            fill="#A41D36" />
+                          <rect
+                            x="9"
+                            y="7"
+                            width="7"
+                            height="2"
+                            fill="#A41D36" />
+                        </svg>
+                      </i>
+                    </button>
+                  </span>
+                  <span
+                    v-else-if="props.column.field =='tradebilling'"
+                    class="rowFactura">
+                    <button
+                      v-if="props.formattedRow[props.column.field]"
+                      class="btn"
+                      @click="downloadPdfBill(props.row)">
+                      <i class="icon-descarga-info">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15 6.94536V17H5V3H10.6163L15 6.94536Z"
+                            stroke="#A41D36"
+                            stroke-width="2" />
+                          <rect
+                            x="9"
+                            y="2"
+                            width="2"
+                            height="6"
+                            fill="#A41D36" />
+                          <rect
+                            x="9"
+                            y="7"
+                            width="7"
+                            height="2"
+                            fill="#A41D36" />
+                        </svg>
+                      </i>
+                    </button>
+                    <button
+                      v-if="props.formattedRow[props.column.field]"
+                      class="btn"
+                      @click="downloadXmlBill(props.row)">
                       <i class="icon-descarga-info">
                         <svg
                           width="20"
@@ -645,22 +709,21 @@ export default {
     closeModalPdf() {
       this.openPdfModal = false;
     },
-    // eslint-disable-next-line no-unused-vars
-    async openModalPdf(record, key) {
+    async openModalPdf(record) {
       try {
         this.loading = true;
-        // const year = record.transactionDate.split('/')[2];
-        // const month = record.transactionDate.split('/')[1].replace(/^0+/, '');
-        // const body = {
-        //   year,
-        //   month,
-        //   documentName: record[key],
-        // };
+        const year = record.transactionDate.split('/')[2];
+        const month = record.transactionDate.split('/')[1].replace(/^0+/, '');
         const body = {
-          year: '2022',
-          month: '5',
-          documentName: 'T3770230-Confirm-20220510-093459-Email-385876.pdf',
+          year,
+          month,
+          documentName: record.tradeconfirmation,
         };
+        // const body = {
+        //   year: '2022',
+        //   month: '5',
+        //   documentName: 'T3770230-Confirm-20220510-093459-Email-385876.pdf',
+        // };
         this.pdfName = body.documentName;
         const response = await InvexRepository.getDocument(body);
         this.loading = false;
@@ -703,6 +766,36 @@ export default {
     },
     seleccionarOperacion(ev) {
       this.product = ev.target.value;
+    },
+    async downloadPdfBill(record) {
+      try {
+        this.loading = true;
+        const body = {
+          PsSerie: record.side === 'Sell' ? 'FACV' : 'FACC',
+          PsFolio: record.tradebilling,
+        };
+        const response = await InvexRepository.downloadPdf(body);
+        this.loading = false;
+        // eslint-disable-next-line no-console
+        console.log(response);
+      } catch (e) {
+        this.loading = false;
+      }
+    },
+    async downloadXmlBill(record) {
+      try {
+        this.loading = true;
+        const body = {
+          PsSerie: record.side === 'Sell' ? 'FACV' : 'FACC',
+          PsFolio: record.tradebilling,
+        };
+        const response = await InvexRepository.downloadXml(body);
+        this.loading = false;
+        // eslint-disable-next-line no-console
+        console.log(response);
+      } catch (e) {
+        this.loading = false;
+      }
     },
   },
 };
