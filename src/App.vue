@@ -712,6 +712,9 @@ export default {
           const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount ? obj.debitAccount.slice(obj.debitAccount.length - 4) : ''}` }));
           const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount ? obj.creditAccount.slice(obj.creditAccount.length - 4) : ''}` }));
           this.rowUpdate = formatCredit;
+        } else {
+          this.rows = [];
+          this.rowUpdate = [];
         }
         this.loading = false;
       } catch (e) {
