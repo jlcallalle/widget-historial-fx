@@ -167,7 +167,7 @@
       font-size: 24px;
       line-height: 29px;
       text-align: center;
-      margin:1.5rem 0 2rem 0;
+      margin:0 0 1rem 0;
   }
   .modal-footer {
       border-top: none;
@@ -184,6 +184,9 @@
       display: block;
       transition: all .3s ease;
   }
+  .box-col-check .col {
+      margin-bottom: 8px;
+  }
   button.close {
     display: flex;
     align-items: center;
@@ -193,6 +196,9 @@
     &:focus {
       outline: none;
     }
+  }
+  .form-check {
+    font-size: 14px;
   }
 
   .table-wrap {
@@ -431,9 +437,13 @@ table.vgt-table {
 
 
 .vgt-wrap__footer .footer__row-count {
-  position: absolute!important;
-  top: -80px;
-  right: 320px;
+  display: none;
+  @include media-breakpoint-up(md) {  
+   display: block;
+   position: absolute!important;
+   top: -80px;
+   right: 320px;
+  }
 }
 
 .vgt-wrap__footer .footer__navigation__page-info {
@@ -452,6 +462,20 @@ table.vgt-table {
 
 .vgt-wrap__footer .footer__row-count__select {
   font-size: 14px!important;
+}
+
+.vgt-wrap__footer .footer__navigation__info {
+  display: none;
+  @include media-breakpoint-up(md) {  
+    display: block;
+  }
+}
+
+@media (max-width: 992px) {
+  .vgt-wrap__footer .footer__navigation__info, 
+  .vgt-wrap__footer .footer__navigation__page-info {
+    display: none!important;
+  }
 }
 
 .vgt-table .th-custom.tipo-cambio span {
