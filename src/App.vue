@@ -96,6 +96,11 @@
                   :value="estatusGeneralSeleccionado"
                   @change="cambiarEstatusGeneral">
                   <option
+                    value=""
+                    selected>
+                    Seleccione un estatus
+                  </option>
+                  <option
                     value="Liquidado"
                     selected>
                     Liquidado
