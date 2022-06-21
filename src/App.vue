@@ -659,10 +659,8 @@ export default {
         fromDate,
         toDate,
         user360T,
-        trade_status: 'C',
         internetFolio,
         origin: 'P',
-        side: 'SELL',
       };
       if (this.product !== '' && this.product) options.product = this.product;
       try {
@@ -670,8 +668,8 @@ export default {
         const records = await InvexRepository.getRecords(options);
         if (records.code === 900) {
           this.rows = this.formatRecords(records.data.catalogList);
-          const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount.slice(obj.debitAccount.length - 4)}` }));
-          const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount.slice(obj.creditAccount.length - 4)}` }));
+          const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount ? obj.debitAccount.slice(obj.debitAccount.length - 4) : ''}` }));
+          const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount ? obj.creditAccount.slice(obj.creditAccount.length - 4) : ''}` }));
           this.rowUpdate = formatCredit;
         }
         this.loading = false;
