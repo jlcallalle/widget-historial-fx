@@ -95,7 +95,6 @@
                   class="form-control"
                   :value="estatusGeneralSeleccionado"
                   @change="cambiarEstatusGeneral">
-                  <option value="" />
                   <option
                     value="Liquidado"
                     selected>
