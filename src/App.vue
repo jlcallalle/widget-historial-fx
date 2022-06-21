@@ -92,11 +92,18 @@
                 <label for="inputEstatus">Estatus General</label>
                 <select
                   id="inputEstatus"
-                  class="form-control">
-                  <option selected>
+                  class="form-control"
+                  :value="estatusGeneralSeleccionado"
+                  @change="cambiarEstatusGeneral">
+                  <option value="" />
+                  <option
+                    value="Liquidado"
+                    selected>
                     Liquidado
                   </option>
-                  <option>No Liquidado</option>
+                  <option value="Sin Liquidar">
+                    No Liquidado
+                  </option>
                 </select>
               </div>
               <div class="form-group col-12 col-md-4 col-xl-2">
@@ -297,6 +304,17 @@
                   rowsPerPageLabel: 'Filas por página',
                   ofLabel: 'de',
                 }">
+                <template
+                  slot="table-column"
+                  slot-scope="props">
+                  <draggable
+                    v-model="columns"
+                    tag="span">
+                    <span>
+                      {{ props.column.label }}
+                    </span>
+                  </draggable>
+                </template>
                 <div slot="emptystate">
                   No hay datos
                 </div>
@@ -517,6 +535,7 @@ export default {
           productDescription: 'MARKET ORDER',
         },
       ],
+      estatusGeneralSeleccionado: '',
       token: '',
       user: null,
     };
@@ -649,6 +668,9 @@ export default {
         newRecord.ordType = ordenes.Def;
         if (ordenes[record.ordType]) newRecord.ordType = ordenes[record.ordType];
         return newRecord;
+      }).filter((record) => {
+        if (this.estatusGeneralSeleccionado === '') return true;
+        return record.statusGeneral === this.estatusGeneralSeleccionado;
       });
     },
     async getRecords() {
@@ -662,7 +684,7 @@ export default {
         trade_status: 'C',
         internetFolio,
         origin: 'P',
-        side: 'SELL',
+        side: '',
       };
       if (this.product !== '' && this.product) options.product = this.product;
       try {
@@ -784,6 +806,9 @@ export default {
       } catch (e) {
         this.loading = false;
       }
+    },
+    cambiarEstatusGeneral(ev) {
+      this.estatusGeneralSeleccionado = ev.target.value;
     },
   },
 };
