@@ -116,7 +116,7 @@
                   id="inputEstatus"
                   class="form-control">
                   <option selected>
-                    Nombre usuario
+                    {{ user.data.user360T }}
                   </option>
                 </select>
               </div>
