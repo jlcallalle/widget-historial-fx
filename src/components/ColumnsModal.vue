@@ -27,7 +27,7 @@
               </h5>
               <div class="container">
                 <p>Selecciona las columnas que deseas visualiza en la tabla:</p>
-                <div class="row row-cols-2">
+                <div class="row box-col-check row-cols-2">
                   <div
                     v-for="(column, index) in auxColumns"
                     :key="index"
