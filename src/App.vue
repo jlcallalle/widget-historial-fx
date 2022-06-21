@@ -113,13 +113,20 @@
                 <label for="inputEstatus">Estatus Pago</label>
                 <select
                   id="inputEstatus"
-                  class="form-control">
-                  <option selected>
-                    Pendiente Pago
+                  :value="status"
+                  class="form-control"
+                  @change="seleccionarStatus">
+                  <option
+                    value=""
+                    selected>
+                    Seleccione un estatus
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  <option
+                    v-for="(value, key, index) in tradeStatus"
+                    :key="index"
+                    :value="value.productCode">
+                    {{ value.productCode }}
+                  </option>
                 </select>
               </div>
               <div class="form-group col-auto box-consulta-descarga">
@@ -500,21 +507,28 @@ export default {
           productCode: 'SWAP',
           productDescription: 'FX SWAPS',
         },
+      ],
+      status: '',
+      tradeStatus: [
         {
-          productCode: 'NDF',
-          productDescription: 'NDF',
+          productCode: 'Captured',
+          productDescription: 'C',
         },
         {
-          productCode: 'BLOCKTRADE',
-          productDescription: 'BLOCK TRADE',
+          productCode: 'Executed',
+          productDescription: 'E',
         },
         {
-          productCode: 'LIMITORDER',
-          productDescription: 'LIMIT ORDER',
+          productCode: 'Completed',
+          productDescription: 'L',
         },
         {
-          productCode: 'MARKETORDER',
-          productDescription: 'MARKET ORDER',
+          productCode: 'Pending',
+          productDescription: 'P',
+        },
+        {
+          productCode: 'Cancelled',
+          productDescription: 'X',
         },
       ],
       token: '',
@@ -659,6 +673,7 @@ export default {
         fromDate,
         toDate,
         user360T,
+        trade_status: this.getStatus(this.status),
         internetFolio,
         origin: 'P',
       };
@@ -676,6 +691,10 @@ export default {
       } catch (e) {
         this.loading = false;
       }
+    },
+    getStatus(status) {
+      const resultado = this.tradeStatus.find((trade) => trade.productCode === status);
+      return resultado.productDescription;
     },
     getColumns() {
       this.columns = this.allColumns.filter((column) => column.show);
@@ -752,6 +771,9 @@ export default {
     },
     seleccionarOperacion(ev) {
       this.product = ev.target.value;
+    },
+    seleccionarStatus(ev) {
+      this.status = ev.target.value;
     },
     async downloadPdfBill(record) {
       try {

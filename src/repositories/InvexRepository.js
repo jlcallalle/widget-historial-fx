@@ -6,8 +6,8 @@ export default {
   getRecords(options) {
     return InvexClient.post(`${prefixUrl}/consultaHistorial`, options);
   },
-  getOperations(network = 'FX') {
-    return InvexClient.get(`${prefixUrl}/lista-operaciones?network=${network}`);
+  getOperations() {
+    return InvexClient.get(`${prefixUrl}/lista-operaciones`);
   },
   validarToken(body) {
     return InvexClient.post(`${prefixUrl}/validarToken`, body);
@@ -20,5 +20,8 @@ export default {
   },
   downloadXml(body) {
     return InvexClient.post(`${prefixUrl}/descargarXML`, body);
+  },
+  getStatus() {
+    return InvexClient.get(`${prefixUrl}/estatus-operacion`);
   },
 };
