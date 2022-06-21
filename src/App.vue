@@ -288,7 +288,7 @@
         <div class="row">
           <div class="box-table-result">
             <div class="table-historial table-responsive mb-4">
-              <!-- <thead class="draggable">
+              <thead class="draggable">
                 <draggable
                   v-model="columns"
                   tag="tr">
@@ -302,7 +302,7 @@
                     <span>{{ header.label }}</span>
                   </th>
                 </draggable>
-              </thead> -->
+              </thead>
               <vue-good-table
                 :columns="columns"
                 :rows="rowUpdate"
@@ -314,18 +314,13 @@
                   rowsPerPageLabel: 'Filas por página',
                   ofLabel: 'de',
                 }">
-                <draggable
-                  v-model="columns"
-                  draggable=".draggableItem"
-                  tag="span">
-                  <template
-                    slot="table-column"
-                    slot-scope="props">
-                    <span class="draggableItem">
-                      {{ props.column.label }}
-                    </span>
-                  </template>
-                </draggable>
+                <template
+                  slot="table-column"
+                  slot-scope="props">
+                  <span class="draggableItem">
+                    {{ props.column.label }}
+                  </span>
+                </template>
                 <div slot="emptystate">
                   No hay datos
                 </div>

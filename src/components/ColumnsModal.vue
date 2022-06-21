@@ -27,27 +27,31 @@
               </h5>
               <div class="container">
                 <p>Selecciona las columnas que deseas visualiza en la tabla:</p>
-                <div class="row box-col-check row-cols-2">
-                  <div
-                    v-for="(column, index) in auxColumns"
-                    :key="index"
-                    class="col">
-                    <div class="form-check">
-                      <input
-                        :id="column.field"
-                        class="form-check-input"
-                        type="checkbox"
-                        :disabled="!column.editable"
-                        :checked="column.show"
-                        :value="column.show"
-                        @change="toggleColumn(index)">
-                      <label
-                        class="form-check-label"
-                        :for="column.field">
-                        {{ column.label }}
-                      </label>
+                <div class="dragContainer">
+                  <draggable
+                    v-model="auxColumns"
+                    ghost-class="dragContainer">
+                    <div
+                      v-for="(column, index) in auxColumns"
+                      :key="index"
+                      class="dragCol">
+                      <div class="form-check">
+                        <input
+                          :id="column.field"
+                          class="form-check-input"
+                          type="checkbox"
+                          :disabled="!column.editable"
+                          :checked="column.show"
+                          :value="column.show"
+                          @change="toggleColumn(index)">
+                        <label
+                          class="form-check-label"
+                          :for="column.field">
+                          {{ column.label }}
+                        </label>
+                      </div>
                     </div>
-                  </div>
+                  </draggable>
                 </div>
               </div>
             </div>
@@ -67,8 +71,13 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable';
+
 export default {
   name: 'ColumnsModal',
+  components: {
+    draggable,
+  },
   props: {
     open: Boolean,
     closeFn: {
@@ -104,5 +113,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+  .dragCol {
+    width: 50%;
+  }
+  .dragContainer > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 </style>
