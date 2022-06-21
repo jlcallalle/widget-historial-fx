@@ -401,6 +401,7 @@
                             fill="#A41D36" />
                         </svg>
                       </i>
+                      PDF
                     </button>
                     <button
                       v-if="props.formattedRow[props.column.field]"
@@ -431,6 +432,7 @@
                             fill="#A41D36" />
                         </svg>
                       </i>
+                      XML
                     </button>
                   </span>
                   <span v-else>
@@ -771,11 +773,11 @@ export default {
       this.columns = columns.filter((column) => column.show);
       this.closeModalColumns();
     },
-    downloadPDF(pdf) {
-      const linkSource = `data:application/pdf;base64,${pdf}`;
+    downloadFile(base64, type, name) {
+      const linkSource = `data:${type};base64,${base64}`;
       const downloadLink = document.createElement('a');
       downloadLink.href = linkSource;
-      downloadLink.download = this.pdfName;
+      downloadLink.download = name;
       downloadLink.click();
     },
     exportExcel() {
@@ -810,9 +812,9 @@ export default {
           PsFolio: record.tradebilling,
         };
         const response = await InvexRepository.downloadPdf(body);
+        const nombreArchivo = `${record.orderID}-${body.PsFolio}-${body.PsSerie}.pdf`;
+        if (response.code === 900) this.downloadFile(response.data.documentContent, 'application/pdf', nombreArchivo);
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log(response);
       } catch (e) {
         this.loading = false;
       }
@@ -825,9 +827,9 @@ export default {
           PsFolio: record.tradebilling,
         };
         const response = await InvexRepository.downloadXml(body);
+        const nombreArchivo = `${record.orderID}-${body.PsFolio}-${body.PsSerie}.xml`;
+        if (response.code === 900) this.downloadFile(response.data.documentContent, 'application/xml', nombreArchivo);
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log(response);
       } catch (e) {
         this.loading = false;
       }
