@@ -288,7 +288,7 @@
         <div class="row">
           <div class="box-table-result">
             <div class="table-historial table-responsive mb-4">
-              <thead class="draggable">
+              <!-- <thead class="draggable">
                 <draggable
                   v-model="columns"
                   tag="tr">
@@ -302,11 +302,10 @@
                     <span>{{ header.label }}</span>
                   </th>
                 </draggable>
-              </thead>
+              </thead> -->
               <vue-good-table
                 :columns="columns"
                 :rows="rowUpdate"
-                :is-draggable="true"
                 :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -315,17 +314,18 @@
                   rowsPerPageLabel: 'Filas por página',
                   ofLabel: 'de',
                 }">
-                <template
-                  slot="table-column"
-                  slot-scope="props">
-                  <draggable
-                    v-model="columns"
-                    tag="span">
-                    <span>
+                <draggable
+                  v-model="columns"
+                  draggable=".draggableItem"
+                  tag="span">
+                  <template
+                    slot="table-column"
+                    slot-scope="props">
+                    <span class="draggableItem">
                       {{ props.column.label }}
                     </span>
-                  </draggable>
-                </template>
+                  </template>
+                </draggable>
                 <div slot="emptystate">
                   No hay datos
                 </div>
@@ -720,6 +720,7 @@ export default {
     },
     getStatus(status) {
       const resultado = this.tradeStatus.find((trade) => trade.productCode === status);
+      if (!resultado) return '';
       return resultado.productDescription;
     },
     getColumns() {
