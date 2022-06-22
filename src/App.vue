@@ -336,7 +336,7 @@
                     <button
                       v-if="props.formattedRow[props.column.field]"
                       class="btn"
-                      @click="openModalPdf(props.formattedRow)">
+                      @click="openModalPdf(props.row)">
                       <i class="icon-descarga-info">
                         <svg
                           width="20"
@@ -759,7 +759,7 @@ export default {
         this.pdfName = body.documentName;
         const response = await InvexRepository.getDocument(body);
         this.loading = false;
-        if (response.code === 0) {
+        if (response.code === 900) {
           this.pdfSelected = response.data.documentContent;
           this.openPdfModal = true;
         }
