@@ -778,9 +778,25 @@ export default {
       downloadLink.download = name;
       downloadLink.click();
     },
+    getExportData() {
+      const columsToIgnore = [
+        'tipoConfirmacion',
+        'tradebilling',
+        'tradeconfirmation',
+      ];
+      const rowData = this.rows.map((row) => {
+        const dataToExport = {};
+        this.columns.forEach((column) => {
+          if (!columsToIgnore.includes(column.field)) dataToExport[column.label] = row[column.field];
+        });
+        return dataToExport;
+      });
+      // eslint-disable-next-line no-console
+      return rowData;
+    },
     exportExcel() {
       if (this.rows.length !== 0) {
-        const data = XLSX.utils.json_to_sheet(this.rows);
+        const data = XLSX.utils.json_to_sheet(this.getExportData());
         const workbook = XLSX.utils.book_new();
         const filename = 'historial-de-operaciones';
         XLSX.utils.book_append_sheet(workbook, data, filename);
@@ -789,7 +805,7 @@ export default {
     },
     exportCsv() {
       if (this.rows.length !== 0) {
-        const data = XLSX.utils.json_to_sheet(this.rows);
+        const data = XLSX.utils.json_to_sheet(this.getExportData());
         const workbook = XLSX.utils.book_new();
         const filename = 'historial-de-operaciones';
         XLSX.utils.book_append_sheet(workbook, data, filename);
