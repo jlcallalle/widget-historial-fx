@@ -116,7 +116,7 @@
                   id="inputEstatus"
                   class="form-control">
                   <option selected>
-                    Nombre usuario
+                    {{ user.data.user360T }}
                   </option>
                 </select>
               </div>
@@ -288,7 +288,7 @@
         <div class="row">
           <div class="box-table-result">
             <div class="table-historial table-responsive mb-4">
-              <!-- <thead class="draggable">
+              <thead class="draggable">
                 <draggable
                   v-model="columns"
                   tag="tr">
@@ -302,7 +302,7 @@
                     <span>{{ header.label }}</span>
                   </th>
                 </draggable>
-              </thead> -->
+              </thead>
               <vue-good-table
                 :columns="columns"
                 :rows="rowUpdate"
@@ -314,18 +314,13 @@
                   rowsPerPageLabel: 'Filas por página',
                   ofLabel: 'de',
                 }">
-                <draggable
-                  v-model="columns"
-                  draggable=".draggableItem"
-                  tag="span">
-                  <template
-                    slot="table-column"
-                    slot-scope="props">
-                    <span class="draggableItem">
-                      {{ props.column.label }}
-                    </span>
-                  </template>
-                </draggable>
+                <template
+                  slot="table-column"
+                  slot-scope="props">
+                  <span class="draggableItem">
+                    {{ props.column.label }}
+                  </span>
+                </template>
                 <div slot="emptystate">
                   No hay datos
                 </div>
@@ -401,6 +396,7 @@
                             fill="#A41D36" />
                         </svg>
                       </i>
+                      PDF
                     </button>
                     <button
                       v-if="props.formattedRow[props.column.field]"
@@ -431,6 +427,7 @@
                             fill="#A41D36" />
                         </svg>
                       </i>
+                      XML
                     </button>
                   </span>
                   <span v-else>
@@ -712,6 +709,9 @@ export default {
           const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount ? obj.debitAccount.slice(obj.debitAccount.length - 4) : ''}` }));
           const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount ? obj.creditAccount.slice(obj.creditAccount.length - 4) : ''}` }));
           this.rowUpdate = formatCredit;
+        } else {
+          this.rows = [];
+          this.rowUpdate = [];
         }
         this.loading = false;
       } catch (e) {
@@ -771,11 +771,11 @@ export default {
       this.columns = columns.filter((column) => column.show);
       this.closeModalColumns();
     },
-    downloadPDF(pdf) {
-      const linkSource = `data:application/pdf;base64,${pdf}`;
+    downloadFile(base64, type, name) {
+      const linkSource = `data:${type};base64,${base64}`;
       const downloadLink = document.createElement('a');
       downloadLink.href = linkSource;
-      downloadLink.download = this.pdfName;
+      downloadLink.download = name;
       downloadLink.click();
     },
     exportExcel() {
@@ -810,9 +810,9 @@ export default {
           PsFolio: record.tradebilling,
         };
         const response = await InvexRepository.downloadPdf(body);
+        const nombreArchivo = `${record.orderID}-${body.PsFolio}-${body.PsSerie}.pdf`;
+        if (response.code === 900) this.downloadFile(response.data.documentContent, 'application/pdf', nombreArchivo);
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log(response);
       } catch (e) {
         this.loading = false;
       }
@@ -825,9 +825,9 @@ export default {
           PsFolio: record.tradebilling,
         };
         const response = await InvexRepository.downloadXml(body);
+        const nombreArchivo = `${record.orderID}-${body.PsFolio}-${body.PsSerie}.xml`;
+        if (response.code === 900) this.downloadFile(response.data.documentContent, 'application/xml', nombreArchivo);
         this.loading = false;
-        // eslint-disable-next-line no-console
-        console.log(response);
       } catch (e) {
         this.loading = false;
       }
