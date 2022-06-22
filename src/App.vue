@@ -644,7 +644,7 @@ export default {
       if (!record.settlement_bankID) statusLiquidacion = 'Pendientes';
       if (!record.settlement_bankName) statusLiquidacion = 'Pendientes';
       if (!record.settlement_beneficiary) statusLiquidacion = 'Pendientes';
-      if (!record.settlement_rfccurp) statusLiquidacion = 'Pendientes';
+      // if (!record.settlement_rfccurp) statusLiquidacion = 'Pendientes';
       return statusLiquidacion;
     },
     validateStatusGeneral(record) {
