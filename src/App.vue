@@ -704,7 +704,7 @@ export default {
       try {
         this.loading = true;
         const records = await InvexRepository.getRecords(options);
-        if (records.code === 900) {
+        if (records.code === 0) {
           this.rows = this.formatRecords(records.data.catalogList);
           const formatDebit = this.rows.map((obj) => ({ ...obj, debitAccount: `**********${obj.debitAccount ? obj.debitAccount.slice(obj.debitAccount.length - 4) : ''}` }));
           const formatCredit = formatDebit.map((obj) => ({ ...obj, creditAccount: `**********${obj.creditAccount ? obj.creditAccount.slice(obj.creditAccount.length - 4) : ''}` }));
