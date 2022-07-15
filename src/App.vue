@@ -526,6 +526,10 @@ export default {
           productCode: 'SWAP',
           productDescription: 'FX SWAPS',
         },
+        {
+          productCode: 'BLOCKTRADE',
+          productDescription: 'BLOCKTRADE',
+        },
       ],
       status: '',
       tradeStatus: [
