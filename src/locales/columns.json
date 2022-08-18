@@ -147,6 +147,13 @@
     "show": false
   },
   {
+    "field": "side",
+    "label": "Side",
+    "thClass": "th-custom side",
+    "editable": true,
+    "show": false
+  },
+  {
     "field": "tradebilling",
     "label": "Ver Factura",
     "thClass": "th-custom ver-factura",
