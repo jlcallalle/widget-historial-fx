@@ -364,6 +364,14 @@
                       </i>
                     </button>
                   </span>
+                  <span v-else-if="props.column.field == 'tradeStatus'">
+                    <a
+                      class="link"
+                      v-if="props.row.tradeStatus == 'Pending'"
+                      href="#"
+                      @click.prevent="redirectInstrucciones()">{{ props.row.tradeStatus }}</a>
+                    <span v-else>{{ props.row.tradeStatus }}</span>
+                  </span>
                   <span
                     v-else-if="props.column.field =='tradebilling'"
                     class="rowFactura">
@@ -855,6 +863,11 @@ export default {
     cambiarEstatusGeneral(ev) {
       this.estatusGeneralSeleccionado = ev.target.value;
     },
+    redirectInstrucciones() {
+      const searchURL = new URL(window.location);
+      const newLink = searchURL.href;
+      window.location.href = newLink;
+    },
   },
 };
 </script>
@@ -877,5 +890,10 @@ img {
   border-radius: 5px;
   background: #f44336;
   display: inline-block;
+}
+.link {
+  color:blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
