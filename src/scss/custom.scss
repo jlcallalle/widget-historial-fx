@@ -528,3 +528,62 @@ table.vgt-table {
   flex-direction: row !important;
   display: flex !important;
 }
+
+/* Estilos Modal Liquidación */
+
+.link {
+  color:#ED002F;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color:#ED002F;
+  }
+}
+
+.modal-instrucciones .modal-body {
+    max-width: 580px;
+}
+
+.box-cuentas {
+    @include media-breakpoint-up(md) {  
+      padding: 0 65px;
+    }
+}
+
+.subtitle-cuenta {
+  margin-bottom: 15px;
+}
+
+.box-alta  {
+  &:hover {
+      text-decoration: none;
+  }
+  span {
+    margin-left: 10px;
+    color:#A41D36;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+.btn-close-white {
+    background: white;
+    color: #6B87BD!important;
+    border-color: #6B87BD!important;
+}
+
+.box-two-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+    @include media-breakpoint-up(md) { 
+      width: 420px;
+    }
+}
+
+.btn-close-white, 
+.btn-solicita {
+    @include media-breakpoint-up(md) { 
+      min-width: 180px;
+    }
+}

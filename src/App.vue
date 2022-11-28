@@ -366,8 +366,8 @@
                   </span>
                   <span v-else-if="props.column.field == 'tradeStatus'">
                     <a
+                      v-if="props.row.tradeStatus == 'Executed'"
                       class="link"
-                      v-if="props.row.tradeStatus == 'Pending'"
                       href="#"
                       @click.prevent="redirectInstrucciones()">{{ props.row.tradeStatus }}</a>
                     <span v-else>{{ props.row.tradeStatus }}</span>
@@ -465,6 +465,10 @@
       :pdf="pdfSelected"
       :pdf-name="pdfName"
       :close-fn="closeModalPdf" />
+    <modal-instrucciones
+      v-if="showModalInstrucciones"
+      :open="showModalInstrucciones"
+      @close="closeInstrucciones" />
   </div>
 </template>
 
@@ -475,6 +479,7 @@ import XLSX from 'xlsx';
 import liquidParser from './liquid/liquidParser';
 import Repository from './repositories/RepositoryFactory';
 import ColumnsModal from './components/ColumnsModal.vue';
+import ModalInstrucciones from './components/ModalInstrucciones.vue';
 import PdfModal from './components/PdfModal.vue';
 import ColumnsMock from './locales/columns.json';
 // import RowMock from './locales/rowmock.json';
@@ -488,6 +493,7 @@ export default {
   name: 'App',
   components: {
     ColumnsModal,
+    ModalInstrucciones,
     PdfModal,
     DatePicker,
     draggable,
@@ -565,6 +571,7 @@ export default {
       estatusGeneralSeleccionado: '',
       token: '',
       user: null,
+      showModalInstrucciones: false,
     };
   },
   computed: {
@@ -864,9 +871,10 @@ export default {
       this.estatusGeneralSeleccionado = ev.target.value;
     },
     redirectInstrucciones() {
-      const searchURL = new URL(window.location);
-      const newLink = searchURL.href;
-      window.location.href = newLink;
+      this.showModalInstrucciones = true;
+    },
+    closeInstrucciones() {
+      this.showModalInstrucciones = false;
     },
   },
 };
@@ -890,10 +898,5 @@ img {
   border-radius: 5px;
   background: #f44336;
   display: inline-block;
-}
-.link {
-  color:blue;
-  text-decoration: underline;
-  cursor: pointer;
 }
 </style>
