@@ -33,21 +33,18 @@
                   </div>
                   <div class="form-row mt-2">
                     <div class="form-group col-12 col-md-10">
-                      <label for="inputProducto">Cuenta Origen:</label>
+                      <label
+                        for="tipoCuentalSelect">Cuenta de Origen:</label>
                       <select
                         id="tipoCuentalSelect"
                         class="form-control">
-                        <option value="1">
-                          1
-                        </option>
-                        <option value="2">
-                          2
-                        </option>
-                        <option value="3">
-                          3
-                        </option>
-                        <option value="4">
-                          4
+                        <option
+                          v-for="(origen, index) in listadoOrigen"
+                          :id="index"
+                          :key="index"
+                          :selected="origenSelected === origen.customerAccount"
+                          :value="origen.customerAccount">
+                          {{ origenTxt(origen) }}
                         </option>
                       </select>
                     </div>
@@ -121,11 +118,22 @@ export default {
   name: 'ModalInstrucciones',
   props: {
     open: Boolean,
+    listadoOrigen: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
 
     };
+  },
+  methods: {
+    origenTxt(origen) {
+      if (!origen) return '';
+      return `${origen.currency}
+                        ${origen.type} - **********${origen.customerAccount.slice(origen.customerAccount.length - 4)}`;
+    },
   },
 };
 </script>

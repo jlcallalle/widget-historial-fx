@@ -24,4 +24,10 @@ export default {
   getStatus() {
     return InvexClient.get(`${prefixUrl}/estatus-operacion`);
   },
+  listaCuentasOrigen(body) {
+    return InvexClient.post(`${prefixUrl}/lista_cuentas_origen`, body);
+  },
+  listaCuentasDestino(body) {
+    return InvexClient.post(`${prefixUrl}/listaCuentasDestino`, body);
+  },
 };
