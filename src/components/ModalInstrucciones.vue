@@ -52,18 +52,15 @@
                       <label for="inputFecha">Cuenta Destino</label>
                       <select
                         id="tipoCuentalSelect"
-                        class="form-control">
-                        <option value="1">
-                          1
-                        </option>
-                        <option value="2">
-                          2
-                        </option>
-                        <option value="3">
-                          3
-                        </option>
-                        <option value="4">
-                          4
+                        class="form-control"
+                        :disabled="origenSelected === null">
+                        <option
+                          v-for="(destino, index) in listadoDestino"
+                          :id="index"
+                          :key="index"
+                          :selected="destinoSelected === destino.BeneficiaryAccount"
+                          :value="destino.BeneficiaryAccount">
+                          {{ destinoTxt(destino) }}
                         </option>
                       </select>
                     </div>
@@ -122,6 +119,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    listadoDestino: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -133,6 +134,13 @@ export default {
       if (!origen) return '';
       return `${origen.currency}
                         ${origen.type} - **********${origen.customerAccount.slice(origen.customerAccount.length - 4)}`;
+    },
+    destinoTxt(destino) {
+      if (!destino) return '';
+      const destinoAux = JSON.parse(JSON.stringify(destino));
+      if (!destinoAux.BeneficiaryAccount) return '';
+      return `USD ${destinoAux.BeneficiaryBank} - **********${destinoAux.BeneficiaryAccount.toString()
+        .slice(destinoAux.BeneficiaryAccount.toString().length - 4)}`;
     },
   },
 };

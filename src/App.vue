@@ -469,6 +469,7 @@
       v-if="showModalInstrucciones"
       :open="showModalInstrucciones"
       :listado-origen="listadoOrigen"
+      :listado-destino="listadoDestino"
       @close="closeInstrucciones" />
   </div>
 </template>
@@ -573,10 +574,14 @@ export default {
       token: '',
       user: null,
       showModalInstrucciones: false,
+      destinoCurrency: 'USD',
+      allListadoDestino: [],
       listadoOrigen: [],
       listadoDestino: [],
       origenSelected: null,
       destinoSelected: null,
+      cuentaOrigen: null,
+      cuentaDestino: null,
     };
   },
   computed: {
@@ -743,35 +748,97 @@ export default {
         this.loading = false;
       }
     },
-    async listaCuentasOrigen() {
-      const current = new Date();
-      const body = {
-        transactionId: `${this.user.data.user360T}${current.getFullYear()}${current.getMonth() + 1}${current.getDate()}${current.getHours()}${current.getMinutes()}${current.getSeconds()}`,
-        requestSystem: 'PORTAL',
-        source: 'PORTALSYS',
-        userId: 'PORTALUSR',
-        branch: '001',
-        sourceUserId: 'PORTALUSR',
-        CustomerNumber: this.user.data.CUI,
-        Type: 'CE',
-        InternetFolio: this.user.data.internetFolio,
-        AllowOperate: 'T',
-        Currency: 'MXN',
-      };
+    async getListadoOrigen() {
       try {
-        this.loading = true;
+        const current = new Date();
+        const body = {
+          transactionId: `${this.user.data.user360T}${current.getFullYear()}${current.getMonth() + 1}${current.getDate()}${current.getHours()}${current.getMinutes()}${current.getSeconds()}`,
+          requestSystem: 'PORTAL',
+          source: 'PORTALSYS',
+          userId: 'PORTALUSR',
+          branch: '001',
+          sourceUserId: 'PORTALUSR',
+          CustomerNumber: this.user.data.CUI,
+          Type: 'CE',
+          InternetFolio: this.user.data.internetFolio,
+          AllowOperate: 'T',
+          Currency: 'MXN',
+        };
         const response = await InvexRepository.listaCuentasOrigen(body);
-        if (response) {
-          if (Array.isArray(response.cuentas)) {
-            this.listadoOrigen = response.cuentas;
-          } else {
-            this.listadoOrigen = [response.cuentas];
-          }
+        if (!response) return false;
+        if (Array.isArray(response.cuentas)) {
+          this.listadoOrigen = response.cuentas;
+        } else {
+          this.listadoOrigen = [response.cuentas];
         }
-        this.loading = false;
+        if (this.listadoOrigen.length > 0) {
+          this.setOrigen({ target: { value: this.listadoOrigen[0].customerAccount } });
+        }
+        return this.listadoOrigen.length > 0;
       } catch (e) {
-        this.loading = false;
+        return false;
       }
+    },
+    async getListadoDestino() {
+      try {
+        const current = new Date();
+        const body = {
+          transactionId: `${this.user.data.user360T}${current.getFullYear()}${current.getMonth() + 1}${current.getDate()}${current.getHours()}${current.getMinutes()}${current.getSeconds()}`,
+          requestSystem: 'PORTAL',
+          source: 'PORTALSYS',
+          userId: 'PORTALUSR',
+          branch: '001',
+          sourceUserId: 'PORTALUSR',
+          CustomerNumber: this.user.data.CUI,
+          Type: 'CE',
+          InternetFolio: this.user.data.internetFolio,
+          AllowOperate: 'S',
+          Currency: 'MXN',
+          SameBank: false,
+          IsBeneficiaryCreditCard: false,
+        };
+        const response = await InvexRepository.listaCuentasDestino(body);
+        const respAux = JSON.parse(JSON.stringify(response));
+        console.log(respAux);
+        if (response) {
+          if (Array.isArray(respAux)) {
+            this.$set(this, 'allListadoDestino', respAux);
+          } else {
+            this.$set(this, 'allListadoDestino', [respAux]);
+          }
+          if (this.allListadoDestino.length > 0) {
+            this.listadoDestino = [];
+            this.destinoSelected = '';
+            this.cuentaDestino = null;
+            const listadoAux = JSON.parse(JSON.stringify(this.allListadoDestino));
+            if (Array.isArray(listadoAux)) {
+              listadoAux.forEach((item) => {
+                if (item.cuentas.beneficiaryData) {
+                  if (Array.isArray(item.cuentas.beneficiaryData.beneficiaryAccount)) {
+                    item.cuentas.beneficiaryData.beneficiaryAccount.forEach((item2) => {
+                      const auxPush = { ...item2, customerAccount: item.cuentas.customerAccount };
+                      this.listadoDestino.push(auxPush);
+                    });
+                  } else {
+                    this.listadoDestino.push({
+                      ...item.cuentas.beneficiaryData.beneficiaryAccount,
+                      customerAccount: item.cuentas.customerAccount,
+                    });
+                  }
+                }
+              });
+            }
+            this.setDestino({ target: { value: this.listadoDestino[0].BeneficiaryAccount } });
+          }
+        } else {
+          this.returnMsgDestino();
+        }
+      } catch (e) {
+        this.returnMsgDestino();
+      }
+    },
+    async returnMsgDestino() {
+      console.log('No se encontraron cuentas destino');
     },
     getStatus(status) {
       const resultado = this.tradeStatus.find((trade) => trade.productCode === status);
@@ -906,9 +973,12 @@ export default {
     cambiarEstatusGeneral(ev) {
       this.estatusGeneralSeleccionado = ev.target.value;
     },
-    redirectInstrucciones() {
+    async redirectInstrucciones() {
       this.showModalInstrucciones = true;
-      this.listaCuentasOrigen();
+      const rsp = await this.getListadoOrigen();
+      if (rsp) {
+        this.getListadoDestino();
+      }
     },
     closeInstrucciones() {
       this.showModalInstrucciones = false;
